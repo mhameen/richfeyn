@@ -37,7 +37,7 @@ const BottomTab = () => {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color}) => {
-            if (color === '#fff') {
+            if (color === '#ffff') {
               return <Image source={HomeTab} />;
             } else {
               return <Image source={ActiveHomeTab}/>;
@@ -51,7 +51,7 @@ const BottomTab = () => {
         options={{
           tabBarLabel: 'Inventory',
           tabBarIcon: ({color}) => {
-            if (color === '#fff') {
+            if (color === '#ffff') {
               return <Image source={InventoryTab} />;
             } else {
               return <Image source={ActiveInventoryTab}/>;
@@ -65,7 +65,7 @@ const BottomTab = () => {
         options={{
           tabBarLabel: 'Nutrition',
           tabBarIcon: ({color}) => {
-            if (color === '#fff') {
+            if (color === '#ffff') {
               return <Image source={NutritionTab} />;
             } else {
               return <Image source={ActiveNutritionTab}/>;
@@ -79,7 +79,7 @@ const BottomTab = () => {
         options={{
           tabBarLabel: 'Recipe',
           tabBarIcon: ({color}) => {
-            if (color === '#fff') {
+            if (color === '#ffff') {
               return <Image source={RecipeTab} />;
             } else {
               return <Image source={ActiveRecipeTab}/>;
@@ -93,7 +93,7 @@ const BottomTab = () => {
         options={{
           tabBarLabel: 'Cart',
           tabBarIcon: ({color}) => {
-            if (color === '#fff') {
+            if (color === '#ffff') {
               return <Image source={CartTab} />;
             } else {
               return <Image source={ActiveCartTab}/>;
