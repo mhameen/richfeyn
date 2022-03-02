@@ -8,7 +8,7 @@ import {
   View,
   Text
 } from 'react-native';
-import {widthToDP, heightToDP} from '../../services/utils';
+import {widthToDP, heightToDP} from '../services/utils';
 
 const RecipeScreen = () => {
 
@@ -39,3 +39,5 @@ const styles = StyleSheet.create({
     paddingBottom: heightToDP('10%'),
   },
 });
+
+// "react-native-gesture-handler": "^2.1.1",

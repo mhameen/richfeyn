@@ -11,8 +11,8 @@ import SplashScreen from 'react-native-splash-screen';
 
 import BottomTab from './src/components/BottomTab';
 
-import {AppContextProvider} from './services/appContext';
-import {reactNavigation} from './services/index';
+import {AppContextProvider} from './src/services/appContext'
+import {reactNavigation} from './src/services/index';
 
 const Stack = createStackNavigator();
 

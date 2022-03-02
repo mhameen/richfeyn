@@ -6,17 +6,17 @@ import RecipeScreen from '../recipeStack/recipeScreen';
 import CartScreen from '../cartStack/cartScreen';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {StyleSheet, Image} from 'react-native';
-import {heightToDP} from '../../services/utils';
-import HomeTab from '../../assets/icons/bottomTab/homeTab.png';
-import ActiveHomeTab from '../../assets/icons/bottomTab/activeHomeTab.png';
-import InventoryTab from '../../assets/icons/bottomTab/inventoryTab.png';
-import ActiveInventoryTab from '../../assets/icons/bottomTab/activeInventoryTab.png';
-import NutritionTab from '../../assets/icons/bottomTab/nutritionTab.png';
-import ActiveNutritionTab from '../../assets/icons/bottomTab/activeNutritionTab.png';
-import CartTab from '../../assets/icons/bottomTab/cartTab.png';
-import ActiveCartTab from '../../assets/icons/bottomTab/activeCartTab.png';
-import RecipeTab from '../../assets/icons/bottomTab/recipeTab.png';
-import ActiveRecipeTab from '../../assets/icons/bottomTab/activeRecipeTab.png';
+import {heightToDP} from '../services/utils';
+import HomeTab from '../assets/icons/bottomTab/homeTab.png';
+import ActiveHomeTab from '../assets/icons/bottomTab/activeHomeTab.png';
+import InventoryTab from '../assets/icons/bottomTab/inventoryTab.png';
+import ActiveInventoryTab from '../assets/icons/bottomTab/activeInventoryTab.png';
+import NutritionTab from '../assets/icons/bottomTab/nutritionTab.png';
+import ActiveNutritionTab from '../assets/icons/bottomTab/activeNutritionTab.png';
+import CartTab from '../assets/icons/bottomTab/cartTab.png';
+import ActiveCartTab from '../assets/icons/bottomTab/activeCartTab.png';
+import RecipeTab from '../assets/icons/bottomTab/recipeTab.png';
+import ActiveRecipeTab from '../assets/icons/bottomTab/activeRecipeTab.png';
 
 const Tab = createMaterialBottomTabNavigator();
 
