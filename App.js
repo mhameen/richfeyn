@@ -3,7 +3,7 @@
  * @flow strict-local
  */
 import React from 'react';
-import {useCallback, useEffect, useState, useRef} from 'react';
+import {useCallback, useEffect, useState, useRef, useContext} from 'react';
 import {Text, StatusBar, LogBox} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -17,13 +17,19 @@ import {reactNavigation} from './src/services/index';
 const Stack = createStackNavigator();
 
 const App = () => {
-    SplashScreen.hide();
-    const [user, setUser] = useState();
-    const routeNameRef = useRef();
-    if (Text.defaultProps == null) {
-        Text.defaultProps = {};
+    // SplashScreen.hide();
+    const {user, updateUserContext} = useContext(AppContextProvider);
+
+    useEffect(() => {
+        onAuthStateChanged();
+    }, [onAuthStateChanged]);
+
+    if (!user) {
+        return <LoginScreen />;
     }
-    Text.defaultProps.allowFontScaling = false;
+    if (!user.displayName) {
+        return <UserNameScreen onAuthStateChanged={onAuthStateChanged} />;
+    }    
 
     return (
         <AppContextProvider user={user}>
@@ -36,16 +42,11 @@ const App = () => {
                 const previousRouteName = routeNameRef.current;
                 const currentRouteName =
                     reactNavigation.navigation.current.getCurrentRoute().name;
-                // if (previousRouteName !== currentRouteName) {
-                //     await analytics().logScreenView({
-                //     screen_name: currentRouteName,
-                //     screen_class: currentRouteName,
-                //     });
-                // }
                 }}>
                 <StatusBar hidden />
-                <Stack.Navigator headerShown={false}>
-                    <Stack.Screen name="BottomTab" component={BottomTab} />
+                <Stack.Navigator screenOptions={{headerShown: false}}>
+                    {/* <Stack.Screen options={{headerShown: false}} name="BottomTab" header={false} component={BottomTab} /> */}
+                    <Stack.Screen name="BottomTab" header={false} component={BottomTab} />
                     {/* <Stack.Screen name="AcademiesScreen" component={AcademiesScreen} /> */}
                 </Stack.Navigator>
             </NavigationContainer>
