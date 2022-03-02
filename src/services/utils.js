@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { BASE_API_URL } from '../constants/constants';
+// import { BASE_API_URL } from '../constants/constants';
+const BASE_API_URL = '';
 
 export const hideError = () => ({
     type: 'HIDE_SNACK_ERROR'
