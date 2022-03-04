@@ -15,8 +15,8 @@ import RootScreen from './src/screens/RootStack/RootScreen';
 import LoginScreen from './src/screens/RootStack/LoginScreen';
 import SignUpScreen from './src/screens/RootStack/SignUpScreen';
 
-import {AppContextProvider} from './src/services/appContext'
-import {reactNavigation} from './src/services/index';
+import { AppContextProvider } from './src/services/appContext';
+import { reactNavigation } from './src/services/index';
 
 const Stack = createStackNavigator();
 
@@ -42,13 +42,13 @@ const App = () => {
     // }    
 
     return (
-        <AppContextProvider user={user}>
-            <NavigationContainer
-                ref={reactNavigation.navigation}
-                onReady={() => {
-                    reactNavigation.isNavigationReady.current = true;
-                }}
-                onStateChange={async (state) => {
+        // <AppContextProvider>
+        <NavigationContainer
+            ref={reactNavigation.navigation}
+            onReady={() => {
+                reactNavigation.isNavigationReady.current = true;
+            }}
+            onStateChange={async (state) => {
                 const previousRouteName = routeNameRef.current;
                 const currentRouteName =
                     reactNavigation.navigation.current.getCurrentRoute().name;
