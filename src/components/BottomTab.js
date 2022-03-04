@@ -1,9 +1,9 @@
 import React from 'react';
-import HomeScreen from '../homeStack/homeScreen';
-import InventoryScreen from '../inventoryStack/inventoryScreen';
-import NutritionScreen from '../nutritionStack/nutritionScreen';
-import RecipeScreen from '../recipeStack/recipeScreen';
-import CartScreen from '../cartStack/cartScreen';
+import HomeScreen from '../screens/HomeStack/HomeScreen';
+import InventoryScreen from '../screens/InventoryStack/InventoryScreen';
+import NutritionScreen from '../screens/NutritionStack/NutritionScreen';
+import RecipeScreen from '../screens/RecipeStack/RecipeScreen';
+import CartScreen from '../screens/CartStack/CartScreen';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {StyleSheet, Image} from 'react-native';
 import {heightToDP} from '../services/utils';

@@ -8,7 +8,8 @@ import {
   View,
   Text
 } from 'react-native';
-import {widthToDP, heightToDP} from '../services/utils';
+import {widthToDP, heightToDP} from '../../services/utils';
+
 
 const RecipeScreen = () => {
 

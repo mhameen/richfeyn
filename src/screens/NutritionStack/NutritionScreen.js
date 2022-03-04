@@ -8,17 +8,16 @@ import {
   View,
   Text
 } from 'react-native';
-import {widthToDP, heightToDP} from '../services/utils';
+import {widthToDP, heightToDP} from '../../services/utils';
 
-const InventoryScreen = () => {
+const NutritionScreen = () => {
 
   return (
-    <Text>InventoryScreen</Text>
+    <Text>NutritionScreen</Text>
   );
 };
 
-export default InventoryScreen;
-
+export default NutritionScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

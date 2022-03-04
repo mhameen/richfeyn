@@ -7,9 +7,13 @@ import {useCallback, useEffect, useState, useRef, useContext} from 'react';
 import {Text, StatusBar, LogBox} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import SplashScreen from 'react-native-splash-screen';
+// import SplashScreen from 'react-native-splash-screen';
 
+import SplashScreen from './src/screens/RootStack/SplashScreen';
 import BottomTab from './src/components/BottomTab';
+import RootScreen from './src/screens/RootStack/RootScreen';
+import LoginScreen from './src/screens/RootStack/LoginScreen';
+import SignUpScreen from './src/screens/RootStack/SignUpScreen';
 
 import {AppContextProvider} from './src/services/appContext'
 import {reactNavigation} from './src/services/index';
@@ -18,18 +22,24 @@ const Stack = createStackNavigator();
 
 const App = () => {
     // SplashScreen.hide();
-    const {user, updateUserContext} = useContext(AppContextProvider);
+    let [user, setUser] = useState()
+    const routeNameRef = useRef();
 
-    useEffect(() => {
-        onAuthStateChanged();
-    }, [onAuthStateChanged]);
+    if (Text.defaultProps == null) {
+        Text.defaultProps = {};
+      }
+      Text.defaultProps.allowFontScaling = false;
 
-    if (!user) {
-        return <LoginScreen />;
-    }
-    if (!user.displayName) {
-        return <UserNameScreen onAuthStateChanged={onAuthStateChanged} />;
-    }    
+    // useEffect(() => {
+    //     onAuthStateChanged();
+    // }, [onAuthStateChanged]);
+
+    // if (!user) {
+    //     return <LoginScreen />;
+    // }
+    // if (!user.displayName) {
+    //     return <UserNameScreen onAuthStateChanged={onAuthStateChanged} />;
+    // }    
 
     return (
         <AppContextProvider user={user}>
@@ -45,9 +55,11 @@ const App = () => {
                 }}>
                 <StatusBar hidden />
                 <Stack.Navigator screenOptions={{headerShown: false}}>
-                    {/* <Stack.Screen options={{headerShown: false}} name="BottomTab" header={false} component={BottomTab} /> */}
-                    <Stack.Screen name="BottomTab" header={false} component={BottomTab} />
-                    {/* <Stack.Screen name="AcademiesScreen" component={AcademiesScreen} /> */}
+                    <Stack.Screen name="SplashScreen" header={false} component={SplashScreen} />
+                    <Stack.Screen name="RootScreen" header={false} component={RootScreen} />
+                    <Stack.Screen name="LoginScreen" header={false} component={LoginScreen} />
+                    <Stack.Screen name="SignUpScreen" header={false} component={SignUpScreen} />
+                    <Stack.Screen name="BottomTab" header={false} component={BottomTab} />                    
                 </Stack.Navigator>
             </NavigationContainer>
         </AppContextProvider>

@@ -8,16 +8,17 @@ import {
   View,
   Text
 } from 'react-native';
-import {widthToDP, heightToDP} from '../services/utils';
+import {widthToDP, heightToDP} from '../../services/utils';
 
-const CartScreen = () => {
+const HomeScreen = () => {
 
   return (
-    <Text>CartScreen</Text>
+    <Text>HomeScreen</Text>
   );
 };
 
-export default CartScreen;
+export default HomeScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

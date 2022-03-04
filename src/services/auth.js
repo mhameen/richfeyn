@@ -1,12 +1,12 @@
 import {getUser, getToken} from './getters'
 
 export const Auth = async () => {
-    const user = await getUser()
-    const token  = await getToken()
-    
+    const user = {'name': "monica"}
+    const token  = "test"
+
     data = {
-        'user': await getUser(),
-        'token': await getToken()
+        'user': user,
+        'token':token
     }
     return data;
 };

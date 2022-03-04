@@ -1,5 +1,8 @@
 import React from 'react';
-import {useEffect, useReducer, useCallback} from 'react';
+import {useEffect, useReducer, useCallback, useState} from 'react';
+import SplashScreen from '../screens/RootStack/SplashScreen';
+import RootScreen from '../screens/RootStack/RootScreen';
+import storage from './storage';
 import Auth from './auth'
 const AppContext = React.createContext();
 
@@ -28,21 +31,19 @@ const AppContextProvider = (props) => {
   const initialState = {
     user: {},
     token:'',
-    isLoggedIn: False
+    // isLoggedIn: false
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [initializing, setInitializing] = useState(true);
 
   const updateTokenContext = useCallback(async () =>{
     let token;
   })
 
   const updateUserContext = useCallback(async () => {
-    // let tempUser = await getUser();
-    let data = await Auth()
-    user = data.user
-    token = data.token
-    
+    let tempUser = {'name': 'monica'}
+
     await dispatch({type: 'UPDATE_USER', value: tempUser});
     return tempUser;
   }, []);
@@ -53,21 +54,23 @@ const AppContextProvider = (props) => {
   }, [updateUserContext]);
 
 
-
   useEffect(() => {
-    start()
-  }, [start]);
+    start().then(()=>setInitializing(false))
+  }, [setTimeout]);
 
 
 
   const value = {
     user: state.user,
     token: state.token,
-    updateTokenContext: updateTokenContext,
+    // updateTokenContext: updateTokenContext,
     updateUserContext: updateUserContext,
   };
 
-
+  // if (!initializing){
+  //   setTimeout(function(){ return <RootScreen/> }, 2000);
+  //   return <RootScreen/>
+  // }
   return (
     <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
   );
