@@ -42,8 +42,8 @@ const App = () => {
     // }    
 
     return (
-        // <AppContextProvider>
-        <NavigationContainer
+        <AppContextProvider>
+            <NavigationContainer
             ref={reactNavigation.navigation}
             onReady={() => {
                 reactNavigation.isNavigationReady.current = true;
