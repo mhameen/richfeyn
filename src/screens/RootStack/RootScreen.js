@@ -1,87 +1,94 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  StatusBar,
-  ImageBackground,
-  Image,
-  Text,
-  Pressable
-} from 'react-native';
+import { View, SafeAreaView, StyleSheet, StatusBar, ImageBackground, Image, Text, Pressable } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { widthToDP, heightToDP } from '../../services/utils';
-import {reactNavigation} from '../../services/index';
+import { reactNavigation } from '../../services/index';
+import { commonStyles } from '../../assets/styles/common';
+
 const RootScreen = () => {
-  return (
-    <ScrollView>
-        <StatusBar hidden />
-        <ImageBackground source={require('../../assets/images/splashScreen/background.png')}
-            style = {styles.container}
-        >
-            <View style={styles.logoBgContainer}>
-                <Image source={require('../../assets/images/rootScreen/logo.png')}/>
-                <Pressable style={styles.signUpButton}
-                  onPress={()=>reactNavigation.navigate('SignUpScreen')}
-                >
-                  {({pressed})=><Text style={pressed?styles.activeText:styles.text}>Sign up</Text>}
-                </Pressable>
-                <Pressable style={styles.logInButton}
-                  // onPress={()=>reactNavigation.navigate('LoginScreen')}
-                  onPress={()=>reactNavigation.navigate('BottomTab')}
-                >
-                  {({pressed})=><Text style={pressed?styles.activeText:styles.text}>Login</Text>}
-              </Pressable>
-            </View>
-        </ImageBackground>
-    </ScrollView>
-  );
+    return (
+        <ScrollView>
+            <StatusBar hidden />
+            <ImageBackground
+                source={require('../../assets/images/splashScreen/background.png')}
+                style={styles.container}
+            >
+                <SafeAreaView>
+                    <View style={{ ...commonStyles.flexOne, marginTop: 40 }}>
+                        <View style={commonStyles.flexTwo}>
+                            <Image source={require('../../assets/images/rootScreen/logo.png')} />
+                        </View>
+                        <View style={commonStyles.flexOne}>
+                            <Pressable
+                                style={styles.signUpButton}
+                                onPress={() => reactNavigation.navigate('SignUpScreen')}
+                            >
+                                {({ pressed }) => (
+                                    <Text
+                                        style={
+                                            pressed
+                                                ? styles.text
+                                                : { ...styles.text, color: 'white', backgroundColor: 'black' }
+                                        }
+                                    >
+                                        Sign up
+                                    </Text>
+                                )}
+                            </Pressable>
+                            <Pressable style={styles.logInButton} onPress={() => reactNavigation.navigate('BottomTab')}>
+                                {({ pressed }) => (
+                                    <Text
+                                        style={
+                                            pressed
+                                                ? { ...styles.text, color: 'white', backgroundColor: 'black' }
+                                                : { ...styles.text, borderColor: 'white' }
+                                        }
+                                    >
+                                        Login
+                                    </Text>
+                                )}
+                            </Pressable>
+                        </View>
+                    </View>
+                </SafeAreaView>
+            </ImageBackground>
+        </ScrollView>
+    );
 };
 
 export default RootScreen;
 
+const height = heightToDP('100%');
+const width = widthToDP('100%');
+
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        height: heightToDP('100%'),
-        width: widthToDP('100%'),
-        justifyContent: 'center',
-        alignItems:'center'
+    container: {
+        flex: 1,
+        height: height,
+        width: width,
+        alignItems: 'center'
     },
-    logoBgContainer:{
-      // borderWidth: 2
+    logoBgContainer: {
+        flex: 1
     },
     signUpButton: {
-      marginTop: heightToDP('23%'),
-      borderRadius: widthToDP('2%'),
-      justifyContent: 'center',
-      alignItems:'center',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     logInButton: {
-      marginVertical: heightToDP('7%'),
-      borderRadius: widthToDP('2%'),
-      justifyContent: 'center',
-      alignItems:'center'
+        marginVertical: 40,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    text:{
-      paddingVertical: heightToDP('1.5%'),
-      paddingHorizontal: widthToDP('2%'),
-      fontSize: widthToDP('6%'),
-      color: '#000000',
-      backgroundColor:'#ffffff',
-      fontWeight: 'bold',
-      alignSelf:'stretch',
-      textAlign:'center',
-      borderRadius: widthToDP('2%'),
-    },
-    activeText:{
-      paddingVertical: heightToDP('1.5%'),
-      paddingHorizontal: widthToDP('2%'),
-      fontSize: widthToDP('6%'),
-      color: '#ffffff',
-      backgroundColor: '#000000',
-      fontWeight: 'bold',
-      alignSelf:'stretch',
-      textAlign:'center',
-      borderRadius: widthToDP('2%'),
+    text: {
+        borderRadius: 10,
+        borderWidth: 1,
+        overflow: 'hidden',
+        paddingVertical: 12,
+        fontSize: 26,
+        backgroundColor: '#ffffff',
+        fontWeight: 'bold',
+        alignSelf: 'stretch',
+        textAlign: 'center'
     }
 });
