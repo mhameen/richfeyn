@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, SafeAreaView, StyleSheet, StatusBar, ImageBackground, Image, Text, Pressable } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { widthToDP, heightToDP } from '../../services/utils';
+
 import { reactNavigation } from '../../services/index';
+
+import { widthToDP, heightToDP } from '../../services/utils';
 import { commonStyles } from '../../assets/styles/common';
 
 const RootScreen = () => {

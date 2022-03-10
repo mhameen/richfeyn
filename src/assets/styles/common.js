@@ -4,8 +4,16 @@ export const colors = {
     lightGray: '#949494',
     gray: '#535353',
     lightBorder: '#e1dcdc',
-    richBlack: '#130f26'
+    richBlack: '#130f26',
+    bgColor: '#E5E5E5',
+    borderColor: '#E1DCDC',
+    white: '#F7FDFF'
 };
+
+export const dimensions = {
+    cardHeight: 256
+};
+
 export const commonStyles = StyleSheet.create({
     flexOne: {
         flex: 1
@@ -20,6 +28,10 @@ export const commonStyles = StyleSheet.create({
         flex: 1,
         padding: 20
     },
+    safeArea: {
+        // backgroundColor: '#E5E5E5',
+        flex: 1
+    },
     row: {
         flexDirection: 'row',
         flex: 1
@@ -27,10 +39,16 @@ export const commonStyles = StyleSheet.create({
     marginTop10: {
         marginTop: 10
     },
+    marginV10: {
+        marginVertical: 10
+    },
     marginTop20: {
         marginTop: 20
     },
     paddingCards: {
         padding: 12
+    },
+    font16: {
+        fontSize: 16
     }
 });
