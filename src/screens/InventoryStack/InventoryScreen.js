@@ -3,29 +3,16 @@ import { Image, ScrollView, StyleSheet, View, SafeAreaView, Text } from 'react-n
 
 import SearchBar from '../../components/common/SearchBar';
 import TopBar from '../../components/common/TopBar';
+import InventoryRow from '../../components/common/InventoryRow';
+import Button from '../../components/common/Button';
 
 import { commonStyles, colors } from '../../assets/styles/common';
 
 const InventoryBanner = ({ text, color }) => {
     return (
-        <View
-            style={{
-                flex: 1,
-                height: 47,
-                backgroundColor: colors.white,
-                marginVertical: 20,
-                overflow: 'visible',
-                marginHorizontal: -20
-            }}
-        >
-            <View
-                style={{
-                    flex: 1,
-                    alignItems: 'flex-start',
-                    justifyContent: 'center'
-                }}
-            >
-                <Text style={{ color: color, fontSize: 20, marginLeft: 20 }}>{text}</Text>
+        <View style={styles.inventoryContainer}>
+            <View style={styles.inventoryView}>
+                <Text style={{ ...styles.bannerText, color: color }}>{text}</Text>
             </View>
         </View>
     );
@@ -43,57 +30,22 @@ const HomeScreen = () => {
                     <TopBar name="Monica Gellar" />
                     <SearchBar placeholder={'Search food from pantry...'} />
                     <InventoryBanner color={colors.richOrange} text="Tracked Items" />
-                    <View
-                        style={{
-                            flex: 1,
-                            backgroundColor: colors.white,
-                            height: 140,
-                            borderWidth: 0.5,
-                            borderColor: colors.borderColor,
-                            borderRadius: 8
-                        }}
-                    >
-                        <View style={{ ...commonStyles.row }}>
-                            <View style={{ flex: 1, padding: 12 }}>
-                                <Image resizeMode="contain" source={require('../../assets/images/basmati.png')} />
-                            </View>
-                            <View style={{ flex: 4, padding: 12 }}>
-                                <Text style={{ color: colors.richBlack, fontSize: 16 }}>
-                                    India Gate Basmati Rice Bag
-                                </Text>
-                                <View
-                                    style={{
-                                        backgroundColor: colors.buttonGray,
-                                        width: 43,
-                                        paddingVertical: 2,
-                                        paddingHorizontal: 3,
-                                        borderRadius: 4,
-                                        alignItems: 'center',
-                                        marginBottom: 10,
-                                        marginTop: 5
-                                    }}
-                                >
-                                    <Text>5 kg</Text>
-                                </View>
-                                <View
-                                    style={{
-                                        backgroundColor: colors.richBlack,
-                                        width: 80,
-                                        paddingVertical: 2,
-                                        paddingHorizontal: 3,
-                                        borderRadius: 4,
-                                        alignItems: 'center'
-                                    }}
-                                >
-                                    <Text style={{ color: colors.white }}>In cart</Text>
-                                </View>
-                            </View>
-                            <View style={{ flex: 1.5 }}>
-                                <Text style={{ fontSize: 10 }}>Expires in 2 days</Text>
-                            </View>
-                        </View>
-                    </View>
+                    <InventoryRow
+                        imagePath={require('../../assets/images/basmati.png')}
+                        retailerPath={require('../../assets/images/dus.png')}
+                        itemName={'India Gate Basmati Rice Bag'}
+                        itemUnit={'5 kg'}
+                        inCart
+                    />
+                    <InventoryRow
+                        imagePath={require('../../assets/images/tomatoes.png')}
+                        retailerPath={require('../../assets/images/bb.png')}
+                        itemName={'Fresh Tomatoes'}
+                        itemUnit={'1 kg'}
+                        inCart={false}
+                    />
                     <InventoryBanner color={colors.richGreen} text="Untracked Items" />
+                    <Button lable={'Add Item to Inventory'} />
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -127,5 +79,19 @@ const styles = StyleSheet.create({
         ...commonStyles.marginTop10,
         justifyContent: 'space-between',
         alignContent: 'space-between'
-    }
+    },
+    inventoryContainer: {
+        flex: 1,
+        height: 47,
+        backgroundColor: colors.white,
+        marginVertical: 20,
+        overflow: 'visible',
+        marginHorizontal: -20
+    },
+    inventoryView: {
+        flex: 1,
+        alignItems: 'flex-start',
+        justifyContent: 'center'
+    },
+    bannerText: { fontSize: 20, marginLeft: 20 }
 });
