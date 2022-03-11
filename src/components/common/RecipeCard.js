@@ -17,7 +17,7 @@ const RecipeCard = ({ title, nutrient, label }) => {
                 </View>
             </View>
             <View style={commonStyles.flexOne}>
-                <Image style={styles.image} source={require('../../assets/images/homeScreen/pasta.png')} />
+                <Image style={styles.image} source={require('../../assets/images/pasta.png')} />
             </View>
         </View>
     );

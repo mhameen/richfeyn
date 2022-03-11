@@ -11,14 +11,11 @@ const RootScreen = () => {
     return (
         <ScrollView>
             <StatusBar hidden />
-            <ImageBackground
-                source={require('../../assets/images/splashScreen/background.png')}
-                style={styles.container}
-            >
+            <ImageBackground source={require('../../assets/images/background.png')} style={styles.container}>
                 <SafeAreaView>
                     <View style={{ ...commonStyles.flexOne, marginTop: 40 }}>
                         <View style={commonStyles.flexTwo}>
-                            <Image source={require('../../assets/images/rootScreen/logo.png')} />
+                            <Image source={require('../../assets/images/logo.png')} />
                         </View>
                         <View style={commonStyles.flexOne}>
                             <Pressable

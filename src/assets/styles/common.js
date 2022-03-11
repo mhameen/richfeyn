@@ -7,7 +7,10 @@ export const colors = {
     richBlack: '#130f26',
     bgColor: '#E5E5E5',
     borderColor: '#E1DCDC',
-    white: '#F7FDFF'
+    white: '#F7FDFF',
+    richOrange: '#D74E09',
+    richGreen: '#629460',
+    buttonGray: '#DADADA'
 };
 
 export const dimensions = {

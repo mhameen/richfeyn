@@ -12,7 +12,7 @@ const TopBar = ({ name }) => {
             </View>
             <View style={commonStyles.row}>
                 <View style={commonStyles.flexOne}>
-                    <Image style={styles.icon} source={require('../../assets/images/homeScreen/inventory.png')} />
+                    <Image style={styles.icon} source={require('../../assets/images/inventory.png')} />
                 </View>
                 <View style={commonStyles.flexThree}>
                     <Text style={{ color: colors.lightGray }}>Hello</Text>

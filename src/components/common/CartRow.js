@@ -30,7 +30,7 @@ const CartRow = ({ name }) => {
                             width: '100%',
                             height: '100%'
                         }}
-                        source={require('../../assets/images/homeScreen/pasta.png')}
+                        source={require('../../assets/images/pasta.png')}
                     />
                 </View>
                 <View style={{ flex: 1 }}>

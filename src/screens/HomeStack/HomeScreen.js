@@ -88,7 +88,7 @@ const HomeScreen = () => {
                                             <Image
                                                 style={styles.inventoryImage}
                                                 resizeMode="cover"
-                                                source={require('../../assets/images/homeScreen/inventory.png')}
+                                                source={require('../../assets/images/inventory.png')}
                                             />
                                         </View>
                                     </View>
