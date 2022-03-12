@@ -1,40 +1,40 @@
-import * as React from 'react';
-import {useEffect, useState, useRef} from 'react';
-import {
-  Animated,
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  View,
-  Text
-} from 'react-native';
-import {widthToDP, heightToDP} from '../../services/utils';
+import React from 'react';
+import { ScrollView, View, SafeAreaView } from 'react-native';
+
+import CartRow from '../../components/common/CartRow';
+import SearchBar from '../../components/common/SearchBar';
+import TopBar from '../../components/common/TopBar';
+
+import { commonStyles } from '../../assets/styles/common';
 
 const CartScreen = () => {
-
-  return (
-    <Text>CartScreen</Text>
-  );
+    return (
+        <SafeAreaView style={commonStyles.safeArea}>
+            <ScrollView
+                style={commonStyles.container}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+            >
+                <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
+                    <TopBar name="Monica Gellar" />
+                    <SearchBar placeholder={'Search for items...'} />
+                    <View
+                        style={{
+                            ...commonStyles.flexOne,
+                            ...commonStyles.marginTop10
+                        }}
+                    >
+                        <CartRow
+                            name={'India gate basmati rice'}
+                            imageSrc={require('../../assets/images/basmati.png')}
+                        />
+                        <CartRow name={'Penne Pasta'} imageSrc={require('../../assets/images/pasta.png')} />
+                        <CartRow name={'Penne Pasta'} imageSrc={require('../../assets/images/pasta.png')} />
+                    </View>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
+    );
 };
 
 export default CartScreen;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: heightToDP('20%'),
-  },
-  logo: {
-    marginTop: -heightToDP('30%'),
-    width: widthToDP('100%'),
-    height: heightToDP('130%'),
-  },
-  footer: {
-    backgroundColor: '#f5f5f5',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    alignItems: 'center',
-    paddingTop: heightToDP('1%'),
-    marginTop: heightToDP('50%'),
-    paddingBottom: heightToDP('10%'),
-  },
-});

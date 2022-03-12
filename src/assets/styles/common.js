@@ -7,10 +7,11 @@ export const colors = {
     richBlack: '#130f26',
     bgColor: '#E5E5E5',
     borderColor: '#E1DCDC',
-    white: '#F7FDFF',
+    white: '#fcfcfc',
     richOrange: '#D74E09',
     richGreen: '#629460',
-    buttonGray: '#DADADA'
+    buttonGray: '#DADADA',
+    counterGray: '#F5F5F8'
 };
 
 export const dimensions = {
@@ -18,6 +19,9 @@ export const dimensions = {
 };
 
 export const commonStyles = StyleSheet.create({
+    flexHalf: {
+        flex: 0.5
+    },
     flexOne: {
         flex: 1
     },
@@ -26,6 +30,9 @@ export const commonStyles = StyleSheet.create({
     },
     flexThree: {
         flex: 3
+    },
+    flexFour: {
+        flex: 4
     },
     container: {
         flex: 1,
@@ -53,5 +60,10 @@ export const commonStyles = StyleSheet.create({
     },
     font16: {
         fontSize: 16
+    },
+    jccaie: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'flex-end'
     }
 });

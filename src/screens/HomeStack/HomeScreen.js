@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, ScrollView, StyleSheet, View, SafeAreaView, Text } from 'react-native';
 
-import { AlertTriangle, PlusCircle, ArrowRightCircle, Trash } from 'react-native-feather';
+import { AlertTriangle, PlusCircle } from 'react-native-feather';
 
 import CartRow from '../../components/common/CartRow';
 import NutritionCard from '../../components/common/NutritionCard';
@@ -110,8 +110,11 @@ const HomeScreen = () => {
                         <View style={{ flex: 1, marginVertical: 20 }}>
                             <Text style={{ color: colors.darkGray, fontSize: 32, fontWeight: '500' }}>Cart</Text>
                         </View>
-                        <CartRow />
-                        <CartRow />
+                        <CartRow
+                            name={'India gate basmati rice'}
+                            imageSrc={require('../../assets/images/basmati.png')}
+                        />
+                        <CartRow name={'Penne Pasta'} imageSrc={require('../../assets/images/pasta.png')} />
                     </View>
                 </View>
             </ScrollView>

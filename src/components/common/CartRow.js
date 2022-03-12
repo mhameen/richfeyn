@@ -2,9 +2,19 @@ import React from 'react';
 import { Image, View, Text, StyleSheet } from 'react-native';
 
 import { colors, commonStyles } from '../../assets/styles/common';
-import { Bookmark, Trash } from 'react-native-feather';
+import { Bookmark, Minus, Plus, Trash } from 'react-native-feather';
+import Counter from 'react-native-counters';
+import Feather from 'react-native-vector-icons/Feather';
 
-const CartRow = ({ name }) => {
+const CartRow = ({ name, imageSrc }) => {
+    const minusIcon = (isDisabled) => {
+        return <Minus width={16} color={colors.richBlack} />;
+    };
+
+    const plusIcon = (isPlusDisabled) => {
+        return <Plus name="plus" width={16} color={colors.richBlack} />;
+    };
+
     return (
         <View
             style={{
@@ -12,48 +22,50 @@ const CartRow = ({ name }) => {
                 ...commonStyles.marginV10
             }}
         >
-            <View
-                style={{
-                    borderWidth: 0.5,
-                    borderColor: colors.lightBorder,
-                    borderRadius: 14,
-                    backgroundColor: colors.white,
-                    height: 180,
-                    padding: 12,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between'
-                }}
-            >
-                <View style={{ flex: 0.8, marginRight: 12 }}>
-                    <Image
-                        style={{
-                            width: '100%',
-                            height: '100%'
-                        }}
-                        source={require('../../assets/images/pasta.png')}
-                    />
+            <View style={styles.view}>
+                <View style={{ flex: 0.7 }}>
+                    <Image style={styles.image} source={imageSrc} resizeMode="contain" />
                 </View>
-                <View style={{ flex: 1 }}>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <View style={{ flex: 4 }}>
-                            <Text style={{ fontSize: 19, fontWeight: '400' }}>Raw Pressed Almond Milk Plan</Text>
+                <View style={commonStyles.flexOne}>
+                    <View style={{ ...commonStyles.row }}>
+                        <View style={commonStyles.flexFour}>
+                            <Text style={{ fontSize: 19, fontWeight: '400' }}>{name}</Text>
                         </View>
-                        <View
-                            style={{
-                                flex: 0.5
-                            }}
-                        >
+                        <View style={commonStyles.flexHalf}>
                             <Bookmark color={colors.richBlack} />
                         </View>
                     </View>
-                    <View style={{ flex: 1 }}>
-                        <Text style={{ color: colors.lightGray, fontSize: 16 }}>5kg</Text>
-                        <Text style={{ color: colors.lightGray, fontSize: 16 }}>Quantity</Text>
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <View style={{ flex: 1 }}>
+                    <View style={commonStyles.flexTwo}>
+                        <View style={commonStyles.flexTwo}>
+                            <Text style={styles.label}>5kg</Text>
+                            <View style={{ ...commonStyles.row, alignItems: 'center' }}>
+                                <Text style={{ ...styles.label, marginRight: 20 }}>Quantity</Text>
+                                <View style={styles.counterStyle}>
+                                    <Counter
+                                        start={1}
+                                        minusIcon={minusIcon}
+                                        plusIcon={plusIcon}
+                                        buttonStyle={{
+                                            borderColor: '#333',
+                                            borderWidth: 0,
+                                            marginHorizontal: -14
+                                        }}
+                                        buttonTextStyle={{
+                                            color: colors.richBlack
+                                        }}
+                                        countTextStyle={{
+                                            color: colors.richBlack,
+                                            fontSize: 16
+                                        }}
+                                    />
+                                </View>
+                            </View>
+                        </View>
+                        <View style={{ ...commonStyles.row, marginTop: 5 }}>
+                            <View style={commonStyles.flexFour}>
                                 <Text style={{ fontSize: 17 }}>₹ 200/-</Text>
                             </View>
-                            <View style={{ justifyContent: 'flex-end' }}>
+                            <View style={commonStyles.flexHalf}>
                                 <Trash color={colors.richBlack} />
                             </View>
                         </View>
@@ -65,16 +77,27 @@ const CartRow = ({ name }) => {
 };
 
 const styles = StyleSheet.create({
-    icon: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-        justifyContent: 'flex-end'
-    },
-    notificationContainer: {
-        flex: 0.34,
+    view: {
+        borderWidth: 0.5,
+        borderColor: colors.lightBorder,
+        borderRadius: 14,
+        backgroundColor: colors.white,
+        height: 180,
+        padding: 12,
         flexDirection: 'row',
-        justifyContent: 'flex-end'
+        justifyContent: 'space-between'
+    },
+    label: { color: colors.lightGray, fontSize: 16 },
+    image: {
+        width: '90%',
+        height: '90%'
+    },
+    counterStyle: {
+        backgroundColor: colors.counterGray,
+        paddingHorizontal: 8,
+        borderWidth: 0.2,
+        borderRadius: 16,
+        borderColor: colors.counterGray
     }
 });
 
