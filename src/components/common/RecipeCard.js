@@ -1,12 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
+import LinearGradient from 'react-native-linear-gradient';
+
 import { ArrowRightCircle } from 'react-native-feather';
 import { colors, commonStyles, dimensions } from '../../assets/styles/common';
 
 const RecipeCard = ({ title, nutrient, label }) => {
     return (
-        <View style={styles.mainContainer}>
+        <LinearGradient
+            style={styles.mainContainer}
+            colors={['#F1F6FA', '#E8F0F3', '#E8F0F3', '#CAD4DD', '#BEC5CC', '#BEC5CC']}
+        >
             <View style={commonStyles.row}>
                 <View style={commonStyles.flexThree}>
                     <Text style={styles.label}>Recipes</Text>
@@ -17,9 +22,12 @@ const RecipeCard = ({ title, nutrient, label }) => {
                 </View>
             </View>
             <View style={commonStyles.flexOne}>
-                <Image style={styles.image} source={require('../../assets/images/pasta.png')} />
+                <Image
+                    style={{ ...styles.image, overflow: 'visible' }}
+                    source={require('../../assets/images/pasta.png')}
+                />
             </View>
-        </View>
+        </LinearGradient>
     );
 };
 

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 export const colors = {
     darkGray: '#4e4e4e',
     lightGray: '#949494',
@@ -39,7 +40,6 @@ export const commonStyles = StyleSheet.create({
         padding: 20
     },
     safeArea: {
-        // backgroundColor: '#E5E5E5',
         flex: 1
     },
     row: {
@@ -65,5 +65,6 @@ export const commonStyles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'flex-end'
-    }
+    },
+    flexOneCenter: { flex: 1, alignItems: 'center' }
 });
