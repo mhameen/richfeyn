@@ -4,12 +4,12 @@ import { TextInput, View, StyleSheet } from 'react-native';
 import { colors } from '../../assets/styles/common';
 import { Search } from 'react-native-feather';
 
-const SearchTab = ({ placeholder }) => {
+const SearchTab = ({ placeholder, onPress }) => {
     return (
         <View style={styles.view}>
             <TextInput placeholder={placeholder} style={styles.textInput}></TextInput>
-            <View style={styles.viewContainer}>
-                <Search color={colors.richBlack} height="24" width="24" />
+            <View style={styles.viewContainer} onPress={onPress}>
+                <Search color={colors.richBlack} height="24" width="24" onPress={onPress} />
             </View>
         </View>
     );

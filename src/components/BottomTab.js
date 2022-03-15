@@ -1,12 +1,17 @@
 import React from 'react';
+import { StyleSheet, Image, StatusBar } from 'react-native';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
 import HomeScreen from '../screens/HomeStack/HomeScreen';
+import SearchScreen from '../screens/HomeStack/SearchScreen';
 import InventoryScreen from '../screens/InventoryStack/InventoryScreen';
 import NutritionScreen from '../screens/NutritionStack/NutritionScreen';
 import RecipeScreen from '../screens/RecipeStack/RecipeScreen';
 import CartScreen from '../screens/CartStack/CartScreen';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { StyleSheet, Image } from 'react-native';
-import { heightToDP } from '../services/utils';
+
 import HomeTab from '../assets/icons/bottomTab/homeTab.png';
 import ActiveHomeTab from '../assets/icons/bottomTab/activeHomeTab.png';
 import InventoryTab from '../assets/icons/bottomTab/inventoryTab.png';
@@ -18,7 +23,21 @@ import ActiveCartTab from '../assets/icons/bottomTab/activeCartTab.png';
 import RecipeTab from '../assets/icons/bottomTab/recipeTab.png';
 import ActiveRecipeTab from '../assets/icons/bottomTab/activeRecipeTab.png';
 
+import { heightToDP } from '../services/utils';
+
 const Tab = createMaterialBottomTabNavigator();
+
+const Stack = createStackNavigator();
+
+// TODO later move all stack navigation into separate files
+function HomeStack() {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="HomeScreen" header={false} component={HomeScreen} />
+            <Stack.Screen name="SearchScreen" header={false} component={SearchScreen} />
+        </Stack.Navigator>
+    );
+}
 
 const BottomTab = () => {
     return (
@@ -34,7 +53,7 @@ const BottomTab = () => {
         >
             <Tab.Screen
                 name="Home"
-                component={HomeScreen}
+                component={HomeStack}
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color }) => {
@@ -105,7 +124,9 @@ const BottomTab = () => {
         </Tab.Navigator>
     );
 };
+
 export default BottomTab;
+
 const styles = StyleSheet.create({
     color: {
         backgroundColor: '#ffff',

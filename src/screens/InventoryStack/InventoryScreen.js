@@ -18,7 +18,7 @@ const InventoryBanner = ({ text, color }) => {
     );
 };
 
-const HomeScreen = () => {
+const InventoryScreen = () => {
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -52,7 +52,7 @@ const HomeScreen = () => {
     );
 };
 
-export default HomeScreen;
+export default InventoryScreen;
 
 const styles = StyleSheet.create({
     mainCard: {
