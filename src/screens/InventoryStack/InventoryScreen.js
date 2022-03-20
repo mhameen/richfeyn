@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, StyleSheet, View, SafeAreaView, Text } from 'react-native';
+import { ScrollView, StyleSheet, View, SafeAreaView, Text } from 'react-native';
 
 import SearchBar from '../../components/common/SearchBar';
 import TopBar from '../../components/common/TopBar';
@@ -56,7 +56,7 @@ export default InventoryScreen;
 
 const styles = StyleSheet.create({
     mainCard: {
-        ...commonStyles.paddingCards,
+        ...commonStyles.padding12,
         height: 186,
         borderWidth: 0.5,
         borderColor: colors.borderColor,

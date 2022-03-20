@@ -7,11 +7,11 @@ import Counter from 'react-native-counters';
 import Feather from 'react-native-vector-icons/Feather';
 
 const CartRow = ({ name, imageSrc }) => {
-    const minusIcon = (isDisabled) => {
+    const minusIcon = () => {
         return <Minus width={16} color={colors.richBlack} />;
     };
 
-    const plusIcon = (isPlusDisabled) => {
+    const plusIcon = () => {
         return <Plus name="plus" width={16} color={colors.richBlack} />;
     };
 

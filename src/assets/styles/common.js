@@ -55,8 +55,11 @@ export const commonStyles = StyleSheet.create({
     marginTop20: {
         marginTop: 20
     },
-    paddingCards: {
+    padding12: {
         padding: 12
+    },
+    paddingB10: {
+        padding: 10
     },
     font16: {
         fontSize: 16

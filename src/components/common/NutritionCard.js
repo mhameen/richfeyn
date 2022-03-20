@@ -40,7 +40,7 @@ const NutritionCard = ({ title, nutrient, label }) => {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        ...commonStyles.paddingCards,
+        ...commonStyles.padding12,
         borderWidth: 0.5,
         borderColor: colors.lightBorder,
         borderRadius: 8,

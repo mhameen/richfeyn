@@ -13,7 +13,7 @@ import { reactNavigation } from '../../services/index';
 
 import RecipeCard from '../../components/common/RecipeCard';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation: { navigate } }) => {
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -23,10 +23,7 @@ const HomeScreen = () => {
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
                     <TopBar name="Monica Gellar" />
-                    <SearchBar
-                        placeholder={'Search food ...'}
-                        onPress={() => reactNavigation.navigate('SearchScreen')}
-                    />
+                    <SearchBar placeholder={'Search food ...'} onPress={() => navigate('SearchScreen')} />
                     <View
                         style={{
                             ...commonStyles.flexOne,
@@ -130,7 +127,7 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
     mainCard: {
-        ...commonStyles.paddingCards,
+        ...commonStyles.padding12,
         height: 186,
         borderWidth: 0.5,
         borderColor: colors.borderColor,
