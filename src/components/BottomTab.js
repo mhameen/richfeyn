@@ -11,6 +11,7 @@ import InventoryScreen from '../screens/InventoryStack/InventoryScreen';
 import NutritionScreen from '../screens/NutritionStack/NutritionScreen';
 import RecipeScreen from '../screens/RecipeStack/RecipeScreen';
 import CartScreen from '../screens/CartStack/CartScreen';
+import WishListScreen from '../screens/HomeStack/WishListScreen';
 
 import HomeTab from '../assets/icons/bottomTab/homeTab.png';
 import ActiveHomeTab from '../assets/icons/bottomTab/activeHomeTab.png';
@@ -35,6 +36,7 @@ function HomeStack() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="HomeScreen" header={false} component={HomeScreen} />
             <Stack.Screen name="SearchScreen" header={false} component={SearchScreen} />
+            <Stack.Screen name="WishListScreen" header={false} component={WishListScreen} />
         </Stack.Navigator>
     );
 }

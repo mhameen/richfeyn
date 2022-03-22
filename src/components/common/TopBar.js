@@ -1,10 +1,10 @@
 import React from 'react';
-import { Image, View, Text, StyleSheet } from 'react-native';
+import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { colors, commonStyles } from '../../assets/styles/common';
 import { Menu, Bell, Bookmark, ShoppingCart } from 'react-native-feather';
 
-const TopBar = ({ name }) => {
+const TopBar = ({ name, onPress }) => {
     return (
         <View style={{ ...commonStyles.row, marginBottom: 10, alignItems: 'center' }}>
             <View style={{ flex: 0.2 }}>
@@ -20,7 +20,9 @@ const TopBar = ({ name }) => {
                 </View>
             </View>
             <View style={styles.notificationContainer}>
-                <Bell color={colors.richBlack} />
+                <TouchableOpacity style={styles.viewContainer} onPress={onPress}>
+                    <Bell color={colors.richBlack} />
+                </TouchableOpacity>
                 <Bookmark color={colors.richBlack} />
                 <ShoppingCart color={colors.richBlack} />
             </View>
