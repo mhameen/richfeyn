@@ -45,7 +45,7 @@ const InventoryScreen = () => {
                         inCart={false}
                     />
                     <InventoryBanner color={colors.richGreen} text="Untracked Items" />
-                    <Button lable={'Add Item to Inventory'} />
+                    <Button label={'Add Item to Inventory'} />
                 </View>
             </ScrollView>
         </SafeAreaView>

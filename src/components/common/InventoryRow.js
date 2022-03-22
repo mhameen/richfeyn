@@ -7,7 +7,7 @@ import { colors, commonStyles } from '../../assets/styles/common';
 
 const InventoryRow = ({ imagePath, itemUnit, itemName, retailerPath, inCart }) => {
     const containerStyle = {
-        ...styles.cartLable,
+        ...styles.cartLabel,
         backgroundColor: inCart ? colors.richBlack : colors.white,
         borderColor: inCart ? colors.white : colors.richBlack
     };
@@ -26,7 +26,7 @@ const InventoryRow = ({ imagePath, itemUnit, itemName, retailerPath, inCart }) =
                     <Button
                         containerStyle={containerStyle}
                         textStyle={textStyle}
-                        lable={inCart ? 'In cart' : 'Add to cart'}
+                        label={inCart ? 'In cart' : 'Add to cart'}
                     />
                 </View>
                 <View style={{ flex: 1.5 }}>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 5
     },
-    cartLable: {
+    cartLabel: {
         width: 80,
         paddingVertical: 2,
         paddingHorizontal: 3,

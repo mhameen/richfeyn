@@ -5,10 +5,10 @@ import { colors } from '../../assets/styles/common';
 
 // default color is black
 
-const Button = ({ lable, containerStyle, textStyle, onPress }) => {
+const Button = ({ label, containerStyle, textStyle, onPress }) => {
     return (
         <View style={{ ...styles.mainContainer, ...containerStyle }} onPress={onPress}>
-            <Text style={{ ...styles.text, ...textStyle }}>{lable}</Text>
+            <Text style={{ ...styles.text, ...textStyle }}>{label}</Text>
         </View>
     );
 };

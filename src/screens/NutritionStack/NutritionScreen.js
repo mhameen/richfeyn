@@ -20,9 +20,9 @@ const CartScreen = () => {
                     <TopBar name="Monica Gellar" />
                     <SearchBar placeholder={'Search for items...'} />
                     <View style={{ ...commonStyles.row, ...commonStyles.marginTop20, justifyContent: 'space-between' }}>
-                        <Button lable={'Daily'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
-                        <Button lable={'Weekly'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
-                        <Button lable={'Monthly'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
+                        <Button label={'Daily'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
+                        <Button label={'Weekly'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
+                        <Button label={'Monthly'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
                     </View>
                     <View
                         style={{
@@ -53,8 +53,8 @@ const CartScreen = () => {
                     </View>
                 </View>
                 <View style={{ ...commonStyles.row, marginBottom: 50, justifyContent: 'space-between' }}>
-                    <Button lable={'See Graphs'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
-                    <Button lable={'Add Nutrients'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
+                    <Button label={'See Graphs'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
+                    <Button label={'Add Nutrients'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
                 </View>
             </ScrollView>
         </SafeAreaView>

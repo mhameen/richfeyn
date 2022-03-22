@@ -34,7 +34,10 @@ const RootScreen = () => {
                                     </Text>
                                 )}
                             </Pressable>
-                            <Pressable style={styles.logInButton} onPress={() => reactNavigation.navigate('BottomTab')}>
+                            <Pressable
+                                style={styles.logInButton}
+                                onPress={() => reactNavigation.navigate('LoginScreen')}
+                            >
                                 {({ pressed }) => (
                                     <Text
                                         style={
