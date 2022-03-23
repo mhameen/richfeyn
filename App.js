@@ -14,6 +14,7 @@ import BottomTab from './src/components/BottomTab';
 import RootScreen from './src/screens/RootStack/RootScreen';
 import LoginScreen from './src/screens/RootStack/LoginScreen';
 import SignUpScreen from './src/screens/RootStack/SignUpScreen';
+import HomeScreen from './src/screens/HomeStack/HomeScreen';
 
 import { AppContextProvider } from './src/services/appContext';
 import { reactNavigation } from './src/services/index';
@@ -60,6 +61,7 @@ const App = () => {
                     <Stack.Screen name="LoginScreen" header={false} component={LoginScreen} />
                     <Stack.Screen name="SignUpScreen" header={false} component={SignUpScreen} />
                     <Stack.Screen name="BottomTab" header={false} component={BottomTab} />
+                    {/* <Stack.Screen name="HomeScreen" header={false} component={HomeScreen} /> */}
                 </Stack.Navigator>
             </NavigationContainer>
         </AppContextProvider>

@@ -1,8 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 
-import { View, StyleSheet, StatusBar, ImageBackground, Image } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, View, StyleSheet, StatusBar, ImageBackground, Image } from 'react-native';
 import { reactNavigation } from '../../services';
 import { widthToDP, heightToDP } from '../../services/utils';
 import RootScreen from './RootScreen';

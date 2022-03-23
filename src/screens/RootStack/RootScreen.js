@@ -1,6 +1,15 @@
 import React from 'react';
-import { View, SafeAreaView, StyleSheet, StatusBar, ImageBackground, Image, Text, Pressable } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {
+    ScrollView,
+    View,
+    SafeAreaView,
+    StyleSheet,
+    StatusBar,
+    ImageBackground,
+    Image,
+    Text,
+    Pressable
+} from 'react-native';
 
 import { reactNavigation } from '../../services/index';
 

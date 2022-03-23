@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { colors } from '../../assets/styles/common';
 
@@ -7,9 +7,9 @@ import { colors } from '../../assets/styles/common';
 
 const Button = ({ label, containerStyle, textStyle, onPress }) => {
     return (
-        <View style={{ ...styles.mainContainer, ...containerStyle }} onPress={onPress}>
+        <TouchableOpacity style={{ ...styles.mainContainer, ...containerStyle }} onPress={onPress}>
             <Text style={{ ...styles.text, ...textStyle }}>{label}</Text>
-        </View>
+        </TouchableOpacity>
     );
 };
 
