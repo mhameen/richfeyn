@@ -3,18 +3,16 @@
  * @flow strict-local
  */
 import React from 'react';
-import { useCallback, useEffect, useState, useRef, useContext } from 'react';
+import { useState, useRef } from 'react';
 import { Text, StatusBar, LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-// import SplashScreen from 'react-native-splash-screen';
 
 import SplashScreen from './src/screens/RootStack/SplashScreen';
 import BottomTab from './src/components/BottomTab';
 import RootScreen from './src/screens/RootStack/RootScreen';
 import LoginScreen from './src/screens/RootStack/LoginScreen';
 import SignUpScreen from './src/screens/RootStack/SignUpScreen';
-import HomeScreen from './src/screens/HomeStack/HomeScreen';
 
 import { AppContextProvider } from './src/services/appContext';
 import { reactNavigation } from './src/services/index';
@@ -61,7 +59,6 @@ const App = () => {
                     <Stack.Screen name="LoginScreen" header={false} component={LoginScreen} />
                     <Stack.Screen name="SignUpScreen" header={false} component={SignUpScreen} />
                     <Stack.Screen name="BottomTab" header={false} component={BottomTab} />
-                    {/* <Stack.Screen name="HomeScreen" header={false} component={HomeScreen} /> */}
                 </Stack.Navigator>
             </NavigationContainer>
         </AppContextProvider>

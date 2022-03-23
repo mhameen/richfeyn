@@ -49,6 +49,9 @@ export const commonStyles = StyleSheet.create({
     marginTop10: {
         marginTop: 10
     },
+    marginTop40: {
+        marginTop: 40
+    },
     marginV10: {
         marginVertical: 10
     },

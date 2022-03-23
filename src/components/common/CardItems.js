@@ -24,14 +24,17 @@ const CardItems = ({ text = '' }) => {
                         source={require('../../assets/images/basmati.png')}
                         resizeMode="contain"
                     />
-                    <View style={{...commonStyles.flexOne, borderBottomColor: 'black', borderBottomWidth: 1}}>
-                        <Text style={{ fontSize: 13, color: colors.richBlack, paddingTop: 5 }}>Daawat Rozana Gold Basmati Rice</Text>
-                        <Text style={{ fontSize: 13, color: colors.richBlack, fontWeight: 'bold', paddingBottom: 5 }}>120 /-</Text>
+                    <View style={{ ...commonStyles.flexOne, borderBottomColor: 'black', borderBottomWidth: 1 }}>
+                        <Text style={{ fontSize: 13, color: colors.richBlack, paddingTop: 5 }}>
+                            Daawat Rozana Gold Basmati Rice
+                        </Text>
+                        <Text style={{ fontSize: 13, color: colors.richBlack, fontWeight: 'bold', paddingBottom: 5 }}>
+                            120 /-
+                        </Text>
                     </View>
                     <Text style={{ fontSize: 11, color: colors.richBlack, paddingTop: 5 }}>MOVE TO CART</Text>
                 </View>
             </View>
-            
         </View>
     );
 };
