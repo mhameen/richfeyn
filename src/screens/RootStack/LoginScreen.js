@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import {
     ScrollView,
@@ -14,16 +14,18 @@ import {
 
 import { Formik } from 'formik';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
-
-import { colors } from '../../assets/styles/common';
+import { Eye, RefreshCcw } from 'react-native-feather';
 
 import Button from '../../components/common/Button';
-import { widthToDP, heightToDP } from '../../services/utils';
-import { Eye, RefreshCcw } from 'react-native-feather';
+
+import { AuthContext } from '../../services/appContext';
 import { reactNavigation } from '../../services';
 
+import { colors } from '../../assets/styles/common';
+import { widthToDP, heightToDP } from '../../services/utils';
+
 const LoginScreen = ({ navigation }) => {
-    const [otp, setOtp] = useState();
+    const { signIn } = useContext(AuthContext);
 
     return (
         <ScrollView>
@@ -143,7 +145,8 @@ const LoginScreen = ({ navigation }) => {
                                         <View style={{ flex: 1, alignItems: 'center' }}>
                                             <Button
                                                 onPress={() => {
-                                                    reactNavigation.navigate('BottomTab');
+                                                    signIn();
+                                                    // reactNavigation.navigate('BottomTab');
                                                 }}
                                                 label={'Login'}
                                                 containerStyle={{ width: '70%' }}

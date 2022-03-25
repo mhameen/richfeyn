@@ -3,7 +3,7 @@
  * @flow strict-local
  */
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { Text, StatusBar, LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,34 +14,39 @@ import RootScreen from './src/screens/RootStack/RootScreen';
 import LoginScreen from './src/screens/RootStack/LoginScreen';
 import SignUpScreen from './src/screens/RootStack/SignUpScreen';
 
-import { AppContextProvider } from './src/services/appContext';
+import { AuthContext } from './src/services/appContext';
 import { reactNavigation } from './src/services/index';
 
 const Stack = createStackNavigator();
 
 const App = () => {
-    // SplashScreen.hide();
-    let [user, setUser] = useState();
+    let [userToken, setUserToken] = useState();
+    let [isLoading, setIsLoading] = useState(false);
     const routeNameRef = useRef();
 
     if (Text.defaultProps == null) {
         Text.defaultProps = {};
     }
-    Text.defaultProps.allowFontScaling = false;
 
-    // useEffect(() => {
-    //     onAuthStateChanged();
-    // }, [onAuthStateChanged]);
+    // Text.defaultProps.allowFontScaling = false;
 
-    // if (!user) {
-    //     return <LoginScreen />;
-    // }
-    // if (!user.displayName) {
-    //     return <UserNameScreen onAuthStateChanged={onAuthStateChanged} />;
-    // }
+    const authContext = useMemo(() => ({
+        signIn: () => {
+            setUserToken('123');
+            setIsLoading(false);
+        },
+        signOut: () => {
+            setUserToken('123');
+            setIsLoading(false);
+        },
+        signUp: () => {
+            setUserToken('123');
+            setIsLoading(false);
+        }
+    }));
 
     return (
-        <AppContextProvider>
+        <AuthContext.Provider value={authContext}>
             <NavigationContainer
                 ref={reactNavigation.navigation}
                 onReady={() => {
@@ -54,14 +59,19 @@ const App = () => {
             >
                 <StatusBar hidden />
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name="SplashScreen" header={false} component={SplashScreen} />
-                    <Stack.Screen name="RootScreen" header={false} component={RootScreen} />
-                    <Stack.Screen name="LoginScreen" header={false} component={LoginScreen} />
-                    <Stack.Screen name="SignUpScreen" header={false} component={SignUpScreen} />
-                    <Stack.Screen name="BottomTab" header={false} component={BottomTab} />
+                    {!userToken ? (
+                        <>
+                            <Stack.Screen name="SplashScreen" header={false} component={SplashScreen} />
+                            <Stack.Screen name="RootScreen" header={false} component={RootScreen} />
+                            <Stack.Screen name="LoginScreen" header={false} component={LoginScreen} />
+                            <Stack.Screen name="SignUpScreen" header={false} component={SignUpScreen} />
+                        </>
+                    ) : (
+                        <Stack.Screen name="BottomTab" header={false} component={BottomTab} />
+                    )}
                 </Stack.Navigator>
             </NavigationContainer>
-        </AppContextProvider>
+        </AuthContext.Provider>
     );
 };
 
