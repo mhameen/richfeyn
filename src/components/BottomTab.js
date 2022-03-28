@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Image, StatusBar } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import HomeScreen from '../screens/HomeStack/HomeScreen';
+import NotificationScreen from '../screens/HomeStack/NotificationScreen';
 import ProfileScreen from '../screens/HomeStack/ProfileScreen';
 import SearchScreen from '../screens/HomeStack/SearchScreen';
 import InventoryScreen from '../screens/InventoryStack/InventoryScreen';
@@ -35,6 +35,7 @@ const Stack = createStackNavigator();
 function HomeStack() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="NotificationScreen" header={false} component={NotificationScreen} />
             <Stack.Screen name="HomeScreen" header={false} component={HomeScreen} />
             <Stack.Screen name="ProfileScreen" header={false} component={ProfileScreen} />
             <Stack.Screen name="SearchScreen" header={false} component={SearchScreen} />
