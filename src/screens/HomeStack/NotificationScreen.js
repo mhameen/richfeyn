@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, StyleSheet, View, SafeAreaView, Text } from 'react-native';
+import { TextInput, ScrollView, StyleSheet, View, SafeAreaView, Text, Picker } from 'react-native';
 
 import { Bell, PlusCircle } from 'react-native-feather';
 
@@ -14,6 +14,7 @@ import { commonStyles, colors } from '../../assets/styles/common';
 import { reactNavigation } from '../../services/index';
 
 import RecipeCard from '../../components/common/RecipeCard';
+import Button from '../../components/common/Button';
 
 const NotificationScreen = ({ navigation: { navigate } }) => {
     return (
@@ -55,8 +56,6 @@ const NotificationScreen = ({ navigation: { navigate } }) => {
                             flex: 4,
                             marginHorizontal: -40,
                             backgroundColor: colors.borderColor,
-                            borderBottomWidth: 0.9,
-                            borderColor: colors.lightGray,
                             marginBottom: 20
                         }}
                     >
@@ -69,6 +68,7 @@ const NotificationScreen = ({ navigation: { navigate } }) => {
                             }}
                         >
                             <Text style={{ fontSize: 16, fontWeight: '500', marginLeft: 10 }}>EDIT</Text>
+                            <View style={{ borderRightWidth: 0.2 }}></View>
                             <Text style={{ fontSize: 16, fontWeight: '500', marginLeft: 10 }}>REMOVE</Text>
                         </View>
                     </View>
@@ -78,18 +78,68 @@ const NotificationScreen = ({ navigation: { navigate } }) => {
                     <View
                         style={{
                             flex: 4,
+                            marginTop: 20,
                             marginHorizontal: -40,
-                            backgroundColor: colors.borderColor
+                            backgroundColor: colors.borderColor,
+                            paddingTop: 20,
+                            paddingBottom: 30
                         }}
                     >
                         <View
                             style={{
                                 flex: 1,
                                 paddingVertical: 10,
-                                flexDirection: 'row'
+                                paddingHorizontal: 40,
+                                width: '100%'
                             }}
                         >
-                            <Text style={{ fontSize: 16, fontWeight: '500', marginLeft: 10 }}>EDIT</Text>
+                            <TextInput
+                                style={{ fontSize: 16, fontWeight: '500', borderBottomWidth: 0.2, paddingBottom: 8 }}
+                                placeholder="Number of times"
+                            />
+                        </View>
+                        <View
+                            style={{
+                                flex: 1,
+                                paddingVertical: 10,
+                                paddingHorizontal: 40,
+                                width: '100%'
+                            }}
+                        >
+                            <TextInput
+                                style={{ fontSize: 16, fontWeight: '500', borderBottomWidth: 0.2, paddingBottom: 8 }}
+                                placeholder="Day"
+                            />
+                        </View>
+                        <View
+                            style={{
+                                flex: 1,
+                                paddingVertical: 10,
+                                paddingHorizontal: 40,
+                                width: '100%'
+                            }}
+                        >
+                            <TextInput
+                                style={{ fontSize: 16, fontWeight: '500', borderBottomWidth: 0.2, paddingBottom: 8 }}
+                                placeholder="Time"
+                            />
+                        </View>
+                        <View
+                            style={{
+                                flex: 1,
+                                paddingVertical: 10,
+                                paddingHorizontal: 40,
+                                width: '100%'
+                            }}
+                        >
+                            <Text style={{ fontSize: 14, color: colors.lightGray, fontWeight: '400' }}>
+                                Mark this as my default notification
+                            </Text>
+                        </View>
+                    </View>
+                    <View>
+                        <View style={{ ...commonStyles.flexOne, ...commonStyles.marginTop40 }}>
+                            <Button label={'Save'} />
                         </View>
                     </View>
                 </View>
