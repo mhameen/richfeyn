@@ -1,5 +1,6 @@
-import React from 'react';
-import { TextInput, ScrollView, StyleSheet, View, SafeAreaView, Text, Picker } from 'react-native';
+import React, { useState } from 'react';
+import { TextInput, ScrollView, StyleSheet, View, SafeAreaView, Text } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 
 import { Bell, PlusCircle } from 'react-native-feather';
 
@@ -17,6 +18,8 @@ import RecipeCard from '../../components/common/RecipeCard';
 import Button from '../../components/common/Button';
 
 const NotificationScreen = ({ navigation: { navigate } }) => {
+    const [selectedLanguage, setSelectedLanguage] = useState();
+
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -93,10 +96,18 @@ const NotificationScreen = ({ navigation: { navigate } }) => {
                                 width: '100%'
                             }}
                         >
-                            <TextInput
+                            {/* <TextInput
                                 style={{ fontSize: 16, fontWeight: '500', borderBottomWidth: 0.2, paddingBottom: 8 }}
                                 placeholder="Number of times"
-                            />
+                            /> */}
+                            <Picker
+                                label="Number of times"
+                                selectedValue={selectedLanguage}
+                                onValueChange={(itemValue, itemIndex) => setSelectedLanguage(itemValue)}
+                            >
+                                <Picker.Item label="Java" value="java" />
+                                <Picker.Item label="JavaScript" value="js" />
+                            </Picker>
                         </View>
                         <View
                             style={{

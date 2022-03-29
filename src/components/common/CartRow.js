@@ -4,7 +4,6 @@ import { Image, View, Text, StyleSheet } from 'react-native';
 import { colors, commonStyles } from '../../assets/styles/common';
 import { Bookmark, Minus, Plus, Trash } from 'react-native-feather';
 import Counter from 'react-native-counters';
-import Feather from 'react-native-vector-icons/Feather';
 
 const CartRow = ({ name, imageSrc }) => {
     const minusIcon = () => {
