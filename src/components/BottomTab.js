@@ -10,6 +10,7 @@ import ProfileScreen from '../screens/HomeStack/ProfileScreen';
 import SearchScreen from '../screens/HomeStack/SearchScreen';
 import InventoryScreen from '../screens/InventoryStack/InventoryScreen';
 import NutritionScreen from '../screens/NutritionStack/NutritionScreen';
+import NutritionChartScreen from '../screens/NutritionStack/NutritionChartScreen';
 import RecipeScreen from '../screens/RecipeStack/RecipeScreen';
 import CartScreen from '../screens/CartStack/CartScreen';
 import WishListScreen from '../screens/HomeStack/WishListScreen';

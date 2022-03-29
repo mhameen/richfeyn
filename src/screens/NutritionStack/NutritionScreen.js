@@ -1,5 +1,7 @@
 import React from 'react';
-import { ScrollView, View, SafeAreaView } from 'react-native';
+import { ScrollView, View, SafeAreaView, Pressable } from 'react-native';
+
+import { reactNavigation } from '../../services/index';
 
 import SearchBar from '../../components/common/SearchBar';
 import TopBar from '../../components/common/TopBar';
@@ -53,7 +55,12 @@ const CartScreen = () => {
                     </View>
                 </View>
                 <View style={{ ...commonStyles.row, marginBottom: 50, justifyContent: 'space-between' }}>
-                    <Button label={'See Graphs'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
+                    <Pressable onPress={() => reactNavigation.navigate('NutritionChartScreen')}
+                    >
+                        {({ pressed }) => (
+                            <Button label={'See Graphs'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
+                        )}
+                    </Pressable>
                     <Button label={'Add Nutrients'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
                 </View>
             </ScrollView>
