@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Image, Picker } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeScreen from '../screens/HomeStack/HomeScreen';
 import NotificationScreen from '../screens/HomeStack/NotificationScreen';
@@ -27,7 +28,7 @@ import ActiveRecipeTab from '../assets/icons/bottomTab/activeRecipeTab.png';
 
 import { heightToDP } from '../services/utils';
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
 
@@ -49,24 +50,22 @@ const BottomTab = () => {
         <Tab.Navigator
             activeColor="#000000"
             inactiveColor="#ffff"
-            tabBarOptions={{
-                showLabel: false,
-                showIcon: true
-            }}
             backBehavior="initialRoute"
             barStyle={styles.color}
+            screenOptions={({ route }) => ({
+                headerShown: false,
+                showLabel: true,
+                tabBarActiveTintColor: 'black',
+                tabBarInactiveTintColor: 'gray'
+            })}
         >
             <Tab.Screen
                 name="Home"
                 component={HomeStack}
                 options={{
                     tabBarLabel: 'Home',
-                    tabBarIcon: ({ color }) => {
-                        if (color === '#ffff') {
-                            return <Image source={HomeTab} />;
-                        } else {
-                            return <Image source={ActiveHomeTab} />;
-                        }
+                    tabBarIcon: ({ focused }) => {
+                        return focused ? <Image source={ActiveHomeTab} /> : <Image source={HomeTab} />;
                     }
                 }}
             />
@@ -75,12 +74,8 @@ const BottomTab = () => {
                 component={InventoryScreen}
                 options={{
                     tabBarLabel: 'Inventory',
-                    tabBarIcon: ({ color }) => {
-                        if (color === '#ffff') {
-                            return <Image source={InventoryTab} />;
-                        } else {
-                            return <Image source={ActiveInventoryTab} />;
-                        }
+                    tabBarIcon: ({ focused }) => {
+                        return focused ? <Image source={ActiveInventoryTab} /> : <Image source={InventoryTab} />;
                     }
                 }}
             />
@@ -89,12 +84,8 @@ const BottomTab = () => {
                 component={NutritionScreen}
                 options={{
                     tabBarLabel: 'Nutrition',
-                    tabBarIcon: ({ color }) => {
-                        if (color === '#ffff') {
-                            return <Image source={NutritionTab} />;
-                        } else {
-                            return <Image source={ActiveNutritionTab} />;
-                        }
+                    tabBarIcon: ({ focused }) => {
+                        return focused ? <Image source={ActiveNutritionTab} /> : <Image source={NutritionTab} />;
                     }
                 }}
             />
@@ -103,12 +94,8 @@ const BottomTab = () => {
                 component={RecipeScreen}
                 options={{
                     tabBarLabel: 'Recipe',
-                    tabBarIcon: ({ color }) => {
-                        if (color === '#ffff') {
-                            return <Image source={RecipeTab} />;
-                        } else {
-                            return <Image source={ActiveRecipeTab} />;
-                        }
+                    tabBarIcon: ({ focused }) => {
+                        return focused ? <Image source={ActiveRecipeTab} /> : <Image source={RecipeTab} />;
                     }
                 }}
             />
@@ -117,12 +104,8 @@ const BottomTab = () => {
                 component={CartScreen}
                 options={{
                     tabBarLabel: 'Cart',
-                    tabBarIcon: ({ color }) => {
-                        if (color === '#ffff') {
-                            return <Image source={CartTab} />;
-                        } else {
-                            return <Image source={ActiveCartTab} />;
-                        }
+                    tabBarIcon: ({ focused }) => {
+                        return focused ? <Image source={ActiveCartTab} /> : <Image source={CartTab} />;
                     }
                 }}
             />

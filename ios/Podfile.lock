@@ -349,7 +349,7 @@ PODS:
     - React-perflogger (= 0.67.4)
   - ReactNativeART (1.2.0):
     - React
-  - RNCAsyncStorage (1.17.0):
+  - RNCAsyncStorage (1.17.1):
     - React-Core
   - RNCClipboard (1.5.1):
     - React-Core
@@ -578,7 +578,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: a9d3c82ddf7ffdad9fbe6a81c6d6f8c06385464d
   ReactCommon: 07d0c460b9ba9af3eaf1b8f5abe7daaad28c9c4e
   ReactNativeART: 78edc68dd4a1e675338cd0cd113319cf3a65f2ab
-  RNCAsyncStorage: 4efdcd2f7378421b29467c9de58f43552b60cf5b
+  RNCAsyncStorage: 4e17811bcadfdc068cd3e2bb896f0fea0198710d
   RNCClipboard: 41d8d918092ae8e676f18adada19104fa3e68495
   RNCPicker: 6d5d64e7b90c240c779ee0938ec433c11e2dd758
   RNGestureHandler: 6e757e487a4834e7280e98e9bac66d2d9c575e9c
