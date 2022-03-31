@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, ScrollView, StyleSheet, View, SafeAreaView, Text } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { Bell, PlusCircle } from 'react-native-feather';
 
@@ -96,17 +97,19 @@ const NotificationScreen = ({ navigation: { navigate } }) => {
                                 width: '100%'
                             }}
                         >
-                            {/* <TextInput
-                                style={{ fontSize: 16, fontWeight: '500', borderBottomWidth: 0.2, paddingBottom: 8 }}
-                                placeholder="Number of times"
-                            /> */}
+                            <Text style={{ fontSize: 16, fontWeight: '500', borderBottomWidth: 0.2, paddingBottom: 8 }}>
+                                Number of times
+                            </Text>
                             <Picker
+                                style={{ height: 22 }}
+                                itemStyle={{ height: 44 }}
                                 label="Number of times"
                                 selectedValue={selectedLanguage}
                                 onValueChange={(itemValue, itemIndex) => setSelectedLanguage(itemValue)}
                             >
-                                <Picker.Item label="Java" value="java" />
-                                <Picker.Item label="JavaScript" value="js" />
+                                <Picker.Item label="1" value="1" />
+                                <Picker.Item label="2" value="2" />
+                                <Picker.Item label="3" value="3" />
                             </Picker>
                         </View>
                         <View
@@ -117,22 +120,58 @@ const NotificationScreen = ({ navigation: { navigate } }) => {
                                 width: '100%'
                             }}
                         >
-                            <TextInput
-                                style={{ fontSize: 16, fontWeight: '500', borderBottomWidth: 0.2, paddingBottom: 8 }}
-                                placeholder="Day"
-                            />
+                            <Text style={{ fontSize: 16, fontWeight: '500', borderBottomWidth: 0.2, paddingBottom: 8 }}>
+                                Day
+                            </Text>
+                            <Picker
+                                style={{ height: 22 }}
+                                itemStyle={{ height: 44 }}
+                                label="Number of times"
+                                selectedValue={selectedLanguage}
+                                onValueChange={(itemValue, itemIndex) => setSelectedLanguage(itemValue)}
+                            >
+                                <Picker.Item label="Monday" value="Monday" />
+                                <Picker.Item label="Tuesday" value="Tuesday" />
+                                <Picker.Item label="Wednesday" value="Wednesday" />
+                                <Picker.Item label="Thursday" value="Thursday" />
+                                <Picker.Item label="Friday" value="Friday" />
+                                <Picker.Item label="Saturday" value="Saturday" />
+                                <Picker.Item label="Sunday" value="Sunday" />
+                            </Picker>
                         </View>
                         <View
                             style={{
                                 flex: 1,
                                 paddingVertical: 10,
-                                paddingHorizontal: 40,
-                                width: '100%'
+                                paddingHorizontal: 40
+                                // width: '100%'
                             }}
                         >
-                            <TextInput
-                                style={{ fontSize: 16, fontWeight: '500', borderBottomWidth: 0.2, paddingBottom: 8 }}
-                                placeholder="Time"
+                            <Text style={{ fontSize: 16, fontWeight: '500', borderBottomWidth: 0.2, paddingBottom: 8 }}>
+                                Time
+                            </Text>
+                            <DateTimePicker
+                                style={{ width: '100%' }}
+                                mode="time"
+                                value={new Date()}
+                                customStyles={{
+                                    dateTouch: {
+                                        height: 40,
+                                        width: '100%'
+                                    },
+                                    dateTouchBody: {
+                                        marginTop: 10,
+                                        backgroundColor: 'white',
+                                        width: '100%'
+                                    },
+                                    dateInput: {
+                                        borderRadius: 5
+                                    },
+                                    placeholderText: {},
+                                    dateText: {
+                                        color: colors.ri
+                                    }
+                                }}
                             />
                         </View>
                         <View
