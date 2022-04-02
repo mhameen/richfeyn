@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Image, ScrollView, StyleSheet, View, SafeAreaView, Text, Modal, Pressable } from 'react-native';
 
 import { AlertTriangle, PlusCircle } from 'react-native-feather';
@@ -14,7 +14,7 @@ import { reactNavigation } from '../../services/index';
 import RecipeCard from '../../components/common/RecipeCard';
 import DrawerScreen from './DrawerScreen';
 
-const HomeScreen = ({ navigation: { navigate } }) => {
+const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
     const [modalVisible, setModalVisible] = useState(false);
 
     return (
@@ -29,14 +29,20 @@ const HomeScreen = ({ navigation: { navigate } }) => {
                     transparent={true}
                     visible={modalVisible}
                     onRequestClose={() => {
-                    Alert.alert("Modal has been closed.");
-                    setModalVisible(!modalVisible);
+                        Alert.alert('Modal has been closed.');
+                        setModalVisible(!modalVisible);
                     }}
                 >
-                    <DrawerScreen navigate={navigate} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+                    <DrawerScreen />
                 </Modal>
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    <TopBar name="Monica Gellar" onPress={() => navigate('DrawerScreen')} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+                    <TopBar
+                        name="Monica Gellar"
+                        onPress={() => navigate('DrawerScreen')}
+                        modalVisible={modalVisible}
+                        setModalVisible={setModalVisible}
+                        toggleDrawer={toggleDrawer}
+                    />
                     <SearchBar placeholder={'Search food ...'} onPress={() => navigate('SearchScreen')} />
                     <View
                         style={{

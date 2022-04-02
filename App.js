@@ -3,6 +3,7 @@
  * @flow strict-local
  */
 import React from 'react';
+import 'react-native-gesture-handler';
 import { useState, useRef, useMemo } from 'react';
 import { Text, StatusBar, LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -36,7 +37,7 @@ const App = () => {
             setIsLoading(false);
         },
         signOut: () => {
-            setUserToken('123');
+            setUserToken(null);
             setIsLoading(false);
         },
         signUp: () => {

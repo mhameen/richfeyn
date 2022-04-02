@@ -1,12 +1,15 @@
 import { Image, ScrollView, StyleSheet, View, SafeAreaView, Text, Modal, Pressable } from 'react-native';
 import { commonStyles, colors } from '../../assets/styles/common';
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 import { Bell, FileText, FolderMinus, LogOut, MapPin, User } from 'react-native-feather';
 
-const DrawerScreen = ({ navigate, modalVisible, setModalVisible}) => {
-    const [userName, setUserName] = useState('Monica Geller')
-  return (
-    <SafeAreaView style={[commonStyles.safeArea, {flexDirection:'row'}]}>
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+
+const DrawerScreen = ({ navigate, modalVisible, setModalVisible }) => {
+    const [userName, setUserName] = useState('Monica Geller');
+    return (
+        <SafeAreaView style={[commonStyles.safeArea, { flexDirection: 'row' }]}>
             <ScrollView
                 style={styles.drawerContainer}
                 showsVerticalScrollIndicator={false}
@@ -23,42 +26,61 @@ const DrawerScreen = ({ navigate, modalVisible, setModalVisible}) => {
                         resizeMode="contain"
                     />
                 </View>
-                <Pressable style={styles.drawerItem} onPress={()=> navigate('ProfileScreen')}>
+                <Pressable style={styles.drawerItem} onPress={() => navigate('ProfileScreen')}>
                     <User width={22} height={22} color={colors.richBlack} />
                     <Text style={styles.itemText}>My Profile</Text>
                 </Pressable>
                 <Pressable style={styles.drawerItem}>
-                    <MapPin width={22} height={22} color={colors.richBlack} onPress={()=> navigate('DeliveryAddressScreen')}/>
+                    <MapPin
+                        width={22}
+                        height={22}
+                        color={colors.richBlack}
+                        onPress={() => navigate('DeliveryAddressScreen')}
+                    />
                     <Text style={styles.itemText}>My Delivery Address</Text>
                 </Pressable>
                 <Pressable style={styles.drawerItem}>
-                    <FileText width={22} height={22} color={colors.richBlack} onPress={()=> navigate('RetailerListScreen')}/>
+                    <FileText
+                        width={22}
+                        height={22}
+                        color={colors.richBlack}
+                        onPress={() => navigate('RetailerListScreen')}
+                    />
                     <Text style={styles.itemText}>Retailer list</Text>
                 </Pressable>
                 <Pressable style={styles.drawerItem}>
-                    <FolderMinus width={22} height={22} color={colors.richBlack} onPress={()=> navigate('ProfileScreen')}/>
+                    <FolderMinus
+                        width={22}
+                        height={22}
+                        color={colors.richBlack}
+                        onPress={() => navigate('ProfileScreen')}
+                    />
                     <Text style={styles.itemText}>My Orders</Text>
                 </Pressable>
                 <Pressable style={styles.drawerItem}>
-                    <Bell width={22} height={22} color={colors.richBlack} onPress={()=> navigate('NotificationScreen')}/>
+                    <Bell
+                        width={22}
+                        height={22}
+                        color={colors.richBlack}
+                        onPress={() => navigate('NotificationScreen')}
+                    />
                     <Text style={styles.itemText}>Notifications</Text>
                 </Pressable>
                 <Pressable style={styles.drawerItem}>
-                    <User width={22} height={22} color={colors.richBlack} onPress={()=> navigate('WishListScreen')}/>
+                    <User width={22} height={22} color={colors.richBlack} onPress={() => navigate('WishListScreen')} />
                     <Text style={styles.itemText}>My Whishlist</Text>
                 </Pressable>
                 <Pressable style={styles.drawerItem}>
-                    <LogOut width={22} height={22} color={colors.richBlack} onPress={()=> navigate('ProfileScreen')}/>
+                    <LogOut width={22} height={22} color={colors.richBlack} onPress={() => navigate('ProfileScreen')} />
                     <Text style={styles.itemText}>Logout</Text>
                 </Pressable>
             </ScrollView>
-            <Pressable style={{flex: 1}} onPress={()=> setModalVisible(false)}>
-            </Pressable>
-    </SafeAreaView>
-  )
-}
+            <Pressable style={{ flex: 1 }} onPress={() => setModalVisible(false)}></Pressable>
+        </SafeAreaView>
+    );
+};
 
-export default DrawerScreen
+export default DrawerScreen;
 
 const styles = StyleSheet.create({
     drawerContainer: {
@@ -67,14 +89,14 @@ const styles = StyleSheet.create({
         width: '50%',
         backgroundColor: '#ffffff'
     },
-    menuContainer:{
+    menuContainer: {
         borderWidth: 1,
-        flex:1,
+        flex: 1
     },
     header: {
         flexDirection: 'row',
-        justifyContent:'space-between',
-        alignItems:'center',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         marginVertical: '10%',
         paddingHorizontal: '5%'
     },
@@ -97,4 +119,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 10
     }
-})
+});
