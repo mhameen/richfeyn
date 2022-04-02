@@ -4,6 +4,8 @@
  */
 import React from 'react';
 import { useState, useRef, useMemo } from 'react';
+import Toast from 'react-native-toast-message';
+
 import { Text, StatusBar, LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -35,6 +37,7 @@ const App = () => {
     const authContext = useMemo(() => ({
         signIn: async (id, mobile_no, otp) => {
             const data = { id, mobile_no, otp };
+            console.log(data);
             verifyOtp(data).then((response) => {
                 if (response?.data?.header?.status === 200) {
                     setUserToken(response?.data?.body?.token);
@@ -78,6 +81,7 @@ const App = () => {
                     )}
                 </Stack.Navigator>
             </NavigationContainer>
+            <Toast />
         </AuthContext.Provider>
     );
 };

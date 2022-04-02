@@ -9,7 +9,6 @@ import SearchBar from '../../components/common/SearchBar';
 import TopBar from '../../components/common/TopBar';
 
 import { commonStyles, colors } from '../../assets/styles/common';
-import { reactNavigation } from '../../services/index';
 
 import RecipeCard from '../../components/common/RecipeCard';
 

@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import {
     ScrollView,
@@ -28,6 +28,8 @@ import { widthToDP, heightToDP } from '../../services/utils';
 
 import { createLoginOTP, verifyOtp } from '../../../src/services/auth';
 
+import { notifySuccess, notifyError } from '../../../src/services/handler';
+
 const formSchema = Yup.object().shape({
     mobile_no: Yup.string('Please enter a valid 10 digit mobile no!')
         .required('Please enter a valid 10 digit mobile no!')
@@ -44,19 +46,33 @@ const otpSchema = formSchema.shape({
         .max(4, 'Must be exactly 4 digits')
 });
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation, route }) => {
     const { signIn } = useContext(AuthContext);
     const [otpSent, setOTPSent] = useState(false);
     const [otpId, setOTPId] = useState();
 
     const sendOTP = (data) => {
         createLoginOTP(data).then((response) => {
+            console.log(response?.data?.body?.status);
             if (response?.data?.body?.status == 200) {
                 setOTPId(response?.data?.body?.data_id);
-                setOTPSent(true);
+            } else if (response?.data?.body?.status == 401) {
+                console.log('in else');
+                const msg = `${data?.mobile_no} is not registered in our system`;
+                notifyError(msg);
             }
         });
     };
+
+    console.log(route);
+
+    useEffect(() => {
+        if (route?.params?.data_id) {
+            setOTPSent(true);
+            setOTPId(route?.params?.data_id);
+            notifySuccess('OTP sent to your registered mobile no');
+        }
+    }, [route?.params?.data_id]);
 
     return (
         <ScrollView>
@@ -83,7 +99,8 @@ const LoginScreen = ({ navigation }) => {
                         flex: 1.5,
                         backgroundColor: colors.white,
                         width: '100%',
-                        borderRadius: 60,
+                        borderTopLeftRadius: 60,
+                        borderTopRightRadius: 60,
                         borderWidth: 0.2,
                         borderColor: colors.lightBorder
                     }}
@@ -92,18 +109,19 @@ const LoginScreen = ({ navigation }) => {
                         <View style={{ flex: 1 }}>
                             <Text style={{ fontSize: 31, color: colors.richBlack, fontWeight: 'bold' }}>Welcome!</Text>
                             <Text style={{ fontSize: 20, color: colors.lightGray, marginTop: 10, fontWeight: '600' }}>
-                                Sign in to continue
+                                Sign in to continue {route?.params?.data_id}
                             </Text>
                         </View>
                         <View style={{ flex: 2 }}>
                             <Formik
-                                initialValues={{ mobile_no: '', otp: '' }}
+                                initialValues={{ mobile_no: route?.params?.mobile_no || '', otp: '' }}
                                 onSubmit={(values) => {
                                     otpSent
                                         ? signIn(otpId, values.mobile_no, values.otp)
                                         : sendOTP({ mobile_no: values.mobile_no });
                                 }}
                                 validationSchema={!otpSent ? formSchema : otpSchema}
+                                enableReinitialize
                             >
                                 {({
                                     handleChange,
@@ -120,6 +138,7 @@ const LoginScreen = ({ navigation }) => {
                                                 onChangeText={handleChange('mobile_no')}
                                                 onBlur={handleBlur('mobile_no')}
                                                 name="mobile_no"
+                                                value={values.mobile_no}
                                                 placeholder="Enter your mobile no"
                                                 maxLength={10}
                                                 min={10}
@@ -151,11 +170,7 @@ const LoginScreen = ({ navigation }) => {
                                                             codeInputHighlightStyle={styles.underlineStyleHighLighted}
                                                         />
                                                         {errors?.otp && touched?.otp ? (
-                                                            <Text style={{ color: 'red' }}>
-                                                                {errors?.otp}
-                                                                {values?.otp}
-                                                                {values?.mobile_no}
-                                                            </Text>
+                                                            <Text style={{ color: 'red' }}>{errors?.otp}</Text>
                                                         ) : null}
                                                     </View>
                                                     <View

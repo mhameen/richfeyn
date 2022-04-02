@@ -1,3 +1,5 @@
+import * as Yup from 'yup';
+
 import React, { useState } from 'react';
 
 import {
@@ -13,17 +15,42 @@ import {
 } from 'react-native';
 
 import { Formik } from 'formik';
-import OTPInputView from '@twotalltotems/react-native-otp-input';
+import { Eye, RefreshCcw } from 'react-native-feather';
 
 import { colors } from '../../assets/styles/common';
 
 import Button from '../../components/common/Button';
+
 import { widthToDP, heightToDP } from '../../services/utils';
-import { Eye, RefreshCcw } from 'react-native-feather';
 import { reactNavigation } from '../../services';
 
-const SignUpScreen = ({ navigation }) => {
+import { signUpUser } from '../../../src/services/auth';
+
+import { notifySuccess, notifyError } from '../../../src/services/handler';
+
+const formSchema = Yup.object().shape({
+    full_name: Yup.string('Please enter valid alphabets').required('Please enter your full name'),
+    mobile_no: Yup.string('Please enter a valid 10 digit mobile no!')
+        .required('Please enter a valid 10 digit mobile no!')
+        .matches(/^[0-9]+$/, 'Must be only digits')
+        .min(10, 'Must be exactly 10 digits')
+        .max(10, 'Must be exactly 10 digits'),
+    email: Yup.string().email('Please enter a valid email')
+});
+
+const SignUpScreen = ({ navigation: { navigate } }) => {
     const [otp, setOtp] = useState();
+
+    const handleSignUp = (full_name, mobile_no, email) => {
+        const [first_name, last_name] = full_name.split(' ');
+        console.log({ first_name, last_name, mobile_no, email });
+        // signUpUser({ first_name, last_name, mobile_no, email }).then((response) => {
+        //     if (response?.data?.header?.status == 400) {
+        //         notifyError(response?.data?.errors?.errorList[0]?.field_error);
+        //     }
+        // });
+        navigate('LoginScreen', { mobile_no, data_id: 10 });
+    };
 
     return (
         <ScrollView>
@@ -40,7 +67,7 @@ const SignUpScreen = ({ navigation }) => {
                         }}
                         source={require('../../assets/images/logobg.png')}
                     >
-                        <View style={{}}>
+                        <View>
                             <Image style={{ width: 65, height: 65 }} source={require('../../assets/images/logo.png')} />
                         </View>
                     </ImageBackground>
@@ -50,7 +77,8 @@ const SignUpScreen = ({ navigation }) => {
                         flex: 2,
                         backgroundColor: colors.white,
                         width: '100%',
-                        borderRadius: 60,
+                        borderTopLeftRadius: 60,
+                        borderTopRightRadius: 60,
                         borderWidth: 0.2,
                         borderColor: colors.lightBorder
                     }}
@@ -64,18 +92,19 @@ const SignUpScreen = ({ navigation }) => {
                         </View>
                         <View style={{ flex: 2 }}>
                             <Formik
-                                initialValues={{ full_name: '', mobile: '', email: '' }}
-                                onSubmit={(values) => console.log(values)}
+                                initialValues={{ full_name: '', mobile_no: '', email: '' }}
+                                onSubmit={(values) => handleSignUp(values.full_name, values.mobile_no, values.email)}
+                                validationSchema={formSchema}
                             >
-                                {({ handleChange, handleBlur, handleSubmit, values }) => (
+                                {({ handleChange, handleBlur, handleSubmit, errors, values, touched }) => (
                                     <>
                                         <View style={{ flex: 1 }}>
                                             <TextInput
+                                                name="full_name"
                                                 onChangeText={handleChange('full_name')}
                                                 onBlur={handleBlur('full_name')}
-                                                // value={'9029138947'}
                                                 placeholder="Enter your name"
-                                                maxLength={10}
+                                                maxLength={50}
                                                 style={{
                                                     color: colors.richBlack,
                                                     borderBottomColor: '#000',
@@ -84,12 +113,15 @@ const SignUpScreen = ({ navigation }) => {
                                                     fontSize: 18
                                                 }}
                                             />
+                                            {errors?.full_name && touched?.full_name ? (
+                                                <Text style={{ color: 'red' }}>{errors?.full_name}</Text>
+                                            ) : null}
                                         </View>
                                         <View style={{ flex: 1 }}>
                                             <TextInput
-                                                onChangeText={handleChange('mobile')}
-                                                onBlur={handleBlur('mobile')}
-                                                // value={'9029138947'}
+                                                onChangeText={handleChange('mobile_no')}
+                                                onBlur={handleBlur('mobile_no')}
+                                                name="mobile_no"
                                                 placeholder="Enter your mobile no"
                                                 maxLength={10}
                                                 style={{
@@ -100,14 +132,18 @@ const SignUpScreen = ({ navigation }) => {
                                                     fontSize: 18
                                                 }}
                                             />
+                                            {errors?.mobile_no && touched?.mobile_no ? (
+                                                <Text style={{ color: 'red' }}>{errors?.mobile_no}</Text>
+                                            ) : null}
                                         </View>
                                         <View style={{ flex: 1 }}>
                                             <TextInput
                                                 onChangeText={handleChange('email')}
                                                 onBlur={handleBlur('email')}
-                                                // value={'9029138947'}
-                                                placeholder="Enter your email"
-                                                maxLength={10}
+                                                name="email"
+                                                placeholder="Enter your email (Optional)"
+                                                maxLength={30}
+                                                autoCapitalize={'none'}
                                                 style={{
                                                     color: colors.richBlack,
                                                     borderBottomColor: '#000',
@@ -116,12 +152,13 @@ const SignUpScreen = ({ navigation }) => {
                                                     fontSize: 18
                                                 }}
                                             />
+                                            {errors?.email && touched?.email ? (
+                                                <Text style={{ color: 'red' }}>{errors?.email}</Text>
+                                            ) : null}
                                         </View>
                                         <View style={{ flex: 0.8, alignItems: 'center' }}>
                                             <Button
-                                                onPress={() => {
-                                                    reactNavigation.navigate('BottomTab');
-                                                }}
+                                                onPress={handleSubmit}
                                                 label={'Sign Up'}
                                                 containerStyle={{ width: '70%' }}
                                                 textStyle={{ fontSize: 26, fontWeight: 'bold' }}

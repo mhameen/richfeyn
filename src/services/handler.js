@@ -1,3 +1,5 @@
+import Toast from 'react-native-toast-message';
+
 const RESPONSE_CODES = {
     success: [200],
     failure: [400, 401, 404, 500],
@@ -5,15 +7,24 @@ const RESPONSE_CODES = {
 };
 
 export const notifySuccess = (message) => {
-    console.log(message);
+    Toast.show({
+        type: 'success',
+        text1: message
+    });
 };
 
 export const notifyError = (message) => {
-    console.log(message);
+    Toast.show({
+        type: 'error',
+        text1: message
+    });
 };
 
 export const notifyWarning = (message) => {
-    console.log(message);
+    Toast.show({
+        type: 'info',
+        text1: message
+    });
 };
 
 export default function handleResponse(result, showToast = true, download = false, customMessage) {

@@ -1,8 +1,8 @@
 import handleResponse from './handler';
 import { makePostCall } from './utils';
 
-export const loginUser = (data) => {
-    const apiPath = `/auth/login/`;
+export const signUpUser = (data) => {
+    const apiPath = `/user/`;
     let response = makePostCall(apiPath, data);
     return handleResponse(response, false).then((resp) => {
         return resp;
