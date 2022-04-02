@@ -47,12 +47,12 @@ export const makePostCall = (endPoint, data) => axios.post(BASE_API_URL + endPoi
 export const makeGetCall = (endPoint) => axios.get(`${BASE_API_URL}${endPoint}`, headers);
 
 export async function getToken() {
-    const token = localStorage.getItem('access_token');
+    const token = await getData('token');
     return token;
 }
 
 export async function makeAuthenticatedPostCall(endPoint, data, keepToken = true) {
-    const token = localStorage.getItem('access_token');
+    const token = await getData('token');
 
     if (!token) {
         console.log('unauthorized');
@@ -70,7 +70,7 @@ export async function makeAuthenticatedPostCall(endPoint, data, keepToken = true
 
 export async function makeAuthenticatedGetCall(endPoint, keepToken = true, isExact = false) {
     let apiPath = isExact ? endPoint : `${BASE_API_URL}${endPoint}`;
-    const token = localStorage.getItem('access_token');
+    const token = await getData('token');
     if (!token) {
         console.log('unauthorized');
     }
@@ -90,7 +90,7 @@ export async function makeAuthenticatedGetCall(endPoint, keepToken = true, isExa
 }
 
 export async function makeAuthenticatedPutCall(endPoint, data, keepToken = true) {
-    const token = localStorage.getItem('access_token');
+    const token = await getData('token');
 
     if (!token) {
         console.log('unauthorized');
@@ -107,7 +107,7 @@ export async function makeAuthenticatedPutCall(endPoint, data, keepToken = true)
 }
 
 export async function makeAuthenticatedDeleteCall(endPoint, keepToken = true) {
-    const token = localStorage.getItem('access_token');
+    const token = await getData('token');
 
     if (!token) {
         console.log('unauthorized');
@@ -125,7 +125,7 @@ export async function makeAuthenticatedDeleteCall(endPoint, keepToken = true) {
 
 export async function makeAuthenticatedDownloadCall(endPoint, keepToken = true, isExact = false) {
     let apiPath = isExact ? endPoint : `${BASE_API_URL}${endPoint}`;
-    const token = localStorage.getItem('access_token');
+    const token = await getData('token');
     if (!token) {
         console.log('unauthorized');
         return;

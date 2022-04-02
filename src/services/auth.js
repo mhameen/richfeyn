@@ -24,3 +24,11 @@ export const verifyOtp = (data) => {
         return resp;
     });
 };
+
+export const logoutAPI = () => {
+    const apiPath = `/auth/logout/`;
+    let response = makePostCall(apiPath);
+    return handleResponse(response, false).then((resp) => {
+        return resp;
+    });
+};
