@@ -26,7 +26,7 @@ const CustomTextInput = ({ label, maxLength, onChange, onBlur, customStyles }) =
     );
 };
 
-const SearchScreen = () => {
+const ProfileScreen = ({ navigation: { navigate } }) => {
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -36,7 +36,7 @@ const SearchScreen = () => {
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
                     {/* <TopBar name="Monica Gellar" /> */}
-                    <ScreenHeader text="My Profile" />
+                    <ScreenHeader text="My Profile"/>
                     <View style={{ ...commonStyles.flexOne, padding: 24 }}>
                         <View style={{ ...commonStyles.flexOne, flexDirection: 'row' }}>
                             <View style={commonStyles.flexHalf}>
@@ -75,7 +75,7 @@ const SearchScreen = () => {
     );
 };
 
-export default SearchScreen;
+export default ProfileScreen;
 
 const styles = StyleSheet.create({
     mainCard: {

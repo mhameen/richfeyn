@@ -4,11 +4,11 @@ import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors, commonStyles } from '../../assets/styles/common';
 import { Menu, Bell, Bookmark, ShoppingCart } from 'react-native-feather';
 
-const TopBar = ({ name, onPress }) => {
+const TopBar = ({ name, onPress, modalVisible, setModalVisible }) => {
     return (
         <View style={{ ...commonStyles.row, marginBottom: 10, alignItems: 'center' }}>
             <View style={{ flex: 0.2 }}>
-                <Menu color={colors.richBlack} height="28" width="28" />
+                <Menu color={colors.richBlack} height="28" width="28" onPress={()=>setModalVisible(!modalVisible)}/>
             </View>
             <View style={commonStyles.row}>
                 <View style={commonStyles.flexOne}>

@@ -29,6 +29,10 @@ import RecipeTab from '../assets/icons/bottomTab/recipeTab.png';
 import ActiveRecipeTab from '../assets/icons/bottomTab/activeRecipeTab.png';
 
 import { heightToDP } from '../services/utils';
+import RetailerListScreen from '../screens/HomeStack/RetailerListScreen';
+import AddressScreen from '../screens/HomeStack/AddressScreen';
+import DeliveryAddressScreen from '../screens/HomeStack/DeliveryAddressScreen';
+import DrawerScreen from '../screens/HomeStack/DrawerScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,9 +42,13 @@ const Stack = createStackNavigator();
 function HomeStack() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="NotificationScreen" header={false} component={NotificationScreen} />
             <Stack.Screen name="HomeScreen" header={false} component={HomeScreen} />
+            {/* <Stack.Screen name="DrawerScreen" header={false} component={DrawerScreen} /> */}
             <Stack.Screen name="ProfileScreen" header={false} component={ProfileScreen} />
+            <Stack.Screen name="DeliveryAddressScreen" header={false} component={DeliveryAddressScreen} />
+            <Stack.Screen name="AddressScreen" header={false} component={AddressScreen} />
+            <Stack.Screen name="RetailerListScreen" header={false} component={RetailerListScreen} />
+            <Stack.Screen name="NotificationScreen" header={false} component={NotificationScreen} />
             <Stack.Screen name="SearchScreen" header={false} component={SearchScreen} />
             <Stack.Screen name="WishListScreen" header={false} component={WishListScreen} />
         </Stack.Navigator>

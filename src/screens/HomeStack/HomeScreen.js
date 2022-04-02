@@ -1,5 +1,5 @@
-import React from 'react';
-import { Image, ScrollView, StyleSheet, View, SafeAreaView, Text } from 'react-native';
+import React, {useState} from 'react';
+import { Image, ScrollView, StyleSheet, View, SafeAreaView, Text, Modal, Pressable } from 'react-native';
 
 import { AlertTriangle, PlusCircle } from 'react-native-feather';
 
@@ -12,8 +12,11 @@ import { commonStyles, colors } from '../../assets/styles/common';
 import { reactNavigation } from '../../services/index';
 
 import RecipeCard from '../../components/common/RecipeCard';
+import DrawerScreen from './DrawerScreen';
 
 const HomeScreen = ({ navigation: { navigate } }) => {
+    const [modalVisible, setModalVisible] = useState(false);
+
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -21,8 +24,19 @@ const HomeScreen = ({ navigation: { navigate } }) => {
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
             >
+                <Modal
+                    animationType="none"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                    setModalVisible(!modalVisible);
+                    }}
+                >
+                    <DrawerScreen navigate={navigate} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+                </Modal>
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    <TopBar name="Monica Gellar" onPress={() => navigate('WishListScreen')} />
+                    <TopBar name="Monica Gellar" onPress={() => navigate('DrawerScreen')} modalVisible={modalVisible} setModalVisible={setModalVisible} />
                     <SearchBar placeholder={'Search food ...'} onPress={() => navigate('SearchScreen')} />
                     <View
                         style={{
