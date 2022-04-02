@@ -14,6 +14,8 @@ import RootScreen from './src/screens/RootStack/RootScreen';
 import LoginScreen from './src/screens/RootStack/LoginScreen';
 import SignUpScreen from './src/screens/RootStack/SignUpScreen';
 
+import { verifyOtp } from './src/services/auth';
+
 import { AuthContext } from './src/services/appContext';
 import { reactNavigation } from './src/services/index';
 
@@ -31,12 +33,17 @@ const App = () => {
     // Text.defaultProps.allowFontScaling = false;
 
     const authContext = useMemo(() => ({
-        signIn: () => {
-            setUserToken('123');
-            setIsLoading(false);
+        signIn: async (id, mobile_no, otp) => {
+            const data = { id, mobile_no, otp };
+            verifyOtp(data).then((response) => {
+                if (response?.data?.header?.status === 200) {
+                    setUserToken(response?.data?.body?.token);
+                    setIsLoading(false);
+                }
+            });
         },
         signOut: () => {
-            setUserToken('123');
+            setUserToken();
             setIsLoading(false);
         },
         signUp: () => {
