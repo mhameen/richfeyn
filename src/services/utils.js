@@ -1,6 +1,8 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Dimensions, PixelRatio } from 'react-native';
+
 const { height, width } = Dimensions.get('window');
 
 import { BASE_API_URL } from '../services/constants';
@@ -12,6 +14,33 @@ export const hideError = () => ({
 const headers = new Headers({
     'Content-Type': 'application/json'
 });
+
+export const storeData = async (key, value) => {
+    try {
+        return await AsyncStorage.setItem(key, value);
+    } catch (e) {
+        console.log(`async error for storage ${e}`);
+        // saving error
+    }
+};
+
+export const getData = async (key) => {
+    try {
+        return await AsyncStorage.getItem(key);
+    } catch (e) {
+        console.log(`async error for storage ${e}`);
+        // saving error
+    }
+};
+
+export const deleteData = async (key) => {
+    try {
+        await AsyncStorage.removeItem(key);
+    } catch (e) {
+        console.log(`async error for storage ${e}`);
+        // saving error
+    }
+};
 
 export const makePostCall = (endPoint, data) => axios.post(BASE_API_URL + endPoint, data);
 

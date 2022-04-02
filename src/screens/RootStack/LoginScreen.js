@@ -55,6 +55,8 @@ const LoginScreen = ({ navigation, route }) => {
         createLoginOTP(data).then((response) => {
             console.log(response?.data?.body?.status);
             if (response?.data?.body?.status == 200) {
+                setOTPSent(true);
+                notifySuccess('OTP sent to your registered mobile no');
                 setOTPId(response?.data?.body?.data_id);
             } else if (response?.data?.body?.status == 401) {
                 console.log('in else');
@@ -68,8 +70,8 @@ const LoginScreen = ({ navigation, route }) => {
 
     useEffect(() => {
         if (route?.params?.data_id) {
-            setOTPSent(true);
             setOTPId(route?.params?.data_id);
+            setOTPSent(true);
             notifySuccess('OTP sent to your registered mobile no');
         }
     }, [route?.params?.data_id]);

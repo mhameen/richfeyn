@@ -3,7 +3,7 @@
  * @flow strict-local
  */
 import React from 'react';
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 
 import { Text, StatusBar, LogBox } from 'react-native';
@@ -20,6 +20,7 @@ import { verifyOtp } from './src/services/auth';
 
 import { AuthContext } from './src/services/appContext';
 import { reactNavigation } from './src/services/index';
+import { storeData, getData, deleteData } from './src/services/utils';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,12 @@ const App = () => {
         Text.defaultProps = {};
     }
 
+    useEffect(() => {
+        getData('token').then((token) => {
+            setUserToken(token);
+        });
+    }, []);
+
     // Text.defaultProps.allowFontScaling = false;
 
     const authContext = useMemo(() => ({
@@ -40,13 +47,18 @@ const App = () => {
             console.log(data);
             verifyOtp(data).then((response) => {
                 if (response?.data?.header?.status === 200) {
-                    setUserToken(response?.data?.body?.token);
+                    const token = response?.data?.body?.token;
+                    setUserToken(token);
+                    storeData('token', token).then((response) => {
+                        console.log(response);
+                    });
                     setIsLoading(false);
                 }
             });
         },
         signOut: () => {
             setUserToken();
+            deleteData('token');
             setIsLoading(false);
         },
         signUp: () => {
