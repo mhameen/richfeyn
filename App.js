@@ -50,8 +50,10 @@ const App = () => {
                 if (response?.data?.header?.status === 200) {
                     const token = response?.data?.body?.token;
                     const fullName = response?.data?.body?.full_name;
+                    const uuid = response?.data?.body?.uuid;
                     storeData('full_name', fullName);
                     storeData('token', token);
+                    storeData('uuid', toString(uuid));
                     setUserToken(token);
                     setIsLoading(false);
                 }
@@ -60,10 +62,8 @@ const App = () => {
         signOut: async () => {
             setUserToken();
             deleteData('token');
-            setIsLoading(false);
-        },
-        signUp: async () => {
-            setUserToken('123');
+            deleteData('full_name');
+            deleteData('uuid');
             setIsLoading(false);
         }
     }));

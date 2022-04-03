@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Image, ScrollView, StyleSheet, View, SafeAreaView, Text, Modal, Pressable } from 'react-native';
 
 import { AlertTriangle, PlusCircle } from 'react-native-feather';
@@ -12,10 +13,22 @@ import { commonStyles, colors } from '../../assets/styles/common';
 
 import RecipeCard from '../../components/common/RecipeCard';
 import DrawerScreen from './DrawerScreen';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import { getUserCart } from '../../services/api';
+import { BASE_URL } from '../../services/constants';
 
 const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
     const [modalVisible, setModalVisible] = useState(false);
+    const [cartProducts, setCartProducts] = useState([]);
+
+    useEffect(() => {
+        getUserCart().then((response) => {
+            if (response?.data?.header?.status == 200) {
+                console.log(response?.data?.body?.results);
+                setCartProducts(response?.data?.body?.results);
+            }
+        });
+    }, []);
 
     return (
         <SafeAreaView style={commonStyles.safeArea}>
@@ -136,11 +149,23 @@ const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
                         <View style={{ flex: 1, marginVertical: 20 }}>
                             <Text style={{ color: colors.darkGray, fontSize: 32, fontWeight: '500' }}>Cart</Text>
                         </View>
-                        <CartRow
-                            name={'India gate basmati rice'}
-                            imageSrc={require('../../assets/images/basmati.png')}
-                        />
-                        <CartRow name={'Penne Pasta'} imageSrc={require('../../assets/images/pasta.png')} />
+                        <>
+                            {cartProducts.map((item) => {
+                                return (
+                                    <CartRow
+                                        dataId={item?.product?.id}
+                                        name={item?.product?.name}
+                                        price={item?.product?.price}
+                                        weight={item?.product?.weight}
+                                        unit={item?.product?.unit}
+                                        quantity={item?.quantity}
+                                        imageSrc={{
+                                            uri: BASE_URL + item?.product?.mobile_img
+                                        }}
+                                    />
+                                );
+                            })}
+                        </>
                     </View>
                 </View>
             </ScrollView>

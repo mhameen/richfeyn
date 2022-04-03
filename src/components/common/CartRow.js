@@ -5,7 +5,7 @@ import { colors, commonStyles } from '../../assets/styles/common';
 import { Bookmark, Minus, Plus, Trash } from 'react-native-feather';
 import Counter from 'react-native-counters';
 
-const CartRow = ({ name, imageSrc }) => {
+const CartRow = ({ name, imageSrc, weight, price, unit, quantity = 1 }) => {
     const minusIcon = () => {
         return <Minus width={16} color={colors.richBlack} />;
     };
@@ -36,12 +36,14 @@ const CartRow = ({ name, imageSrc }) => {
                     </View>
                     <View style={commonStyles.flexTwo}>
                         <View style={commonStyles.flexTwo}>
-                            <Text style={styles.label}>5kg</Text>
+                            <Text style={styles.label}>
+                                {weight} {unit}
+                            </Text>
                             <View style={{ ...commonStyles.row, alignItems: 'center' }}>
                                 <Text style={{ ...styles.label, marginRight: 20 }}>Quantity</Text>
                                 <View style={styles.counterStyle}>
                                     <Counter
-                                        start={1}
+                                        start={quantity}
                                         minusIcon={minusIcon}
                                         plusIcon={plusIcon}
                                         buttonStyle={{
@@ -62,7 +64,7 @@ const CartRow = ({ name, imageSrc }) => {
                         </View>
                         <View style={{ ...commonStyles.row, marginTop: 5 }}>
                             <View style={commonStyles.flexFour}>
-                                <Text style={{ fontSize: 17 }}>₹ 200/-</Text>
+                                <Text style={{ fontSize: 17 }}>₹ {price}/-</Text>
                             </View>
                             <View style={commonStyles.flexHalf}>
                                 <Trash color={colors.richBlack} />
