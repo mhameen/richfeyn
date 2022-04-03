@@ -20,7 +20,7 @@ const SearchScreen = () => {
                 showsHorizontalScrollIndicator={false}
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    {/* <TopBar name="Monica Gellar" /> */}
+                    {/* <TopBar  /> */}
                     <ScreenHeader text="Search" />
                     <SearchBar
                         placeholder={'Search food ...'}

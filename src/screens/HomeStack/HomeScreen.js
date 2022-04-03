@@ -12,6 +12,7 @@ import { commonStyles, colors } from '../../assets/styles/common';
 
 import RecipeCard from '../../components/common/RecipeCard';
 import DrawerScreen from './DrawerScreen';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -49,7 +50,8 @@ const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
                             ...commonStyles.marginTop10
                         }}
                     >
-                        <View
+                        <TouchableOpacity
+                            onPress={() => navigate('InventoryStack')}
                             style={{
                                 ...commonStyles.flexOne,
                                 ...commonStyles.marginTop10
@@ -114,17 +116,21 @@ const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
                                     </View>
                                 </View>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                         <View style={styles.nutrientCard}>
                             <View style={{ flex: 1, paddingRight: 5 }}>
-                                <NutritionCard
-                                    title={` Nutrition${'\n'} relay`}
-                                    nutrient={'Carbohydrates'}
-                                    label={'Target: 300g'}
-                                />
+                                <TouchableOpacity onPress={() => navigate('NutritionStack')}>
+                                    <NutritionCard
+                                        title={` Nutrition${'\n'} relay`}
+                                        nutrient={'Carbohydrates'}
+                                        label={'Target: 300g'}
+                                    />
+                                </TouchableOpacity>
                             </View>
                             <View style={{ flex: 1, paddingLeft: 5 }}>
-                                <RecipeCard />
+                                <TouchableOpacity onPress={() => navigate('RecipeStack')}>
+                                    <RecipeCard />
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={{ flex: 1, marginVertical: 20 }}>

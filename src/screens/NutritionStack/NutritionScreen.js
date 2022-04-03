@@ -19,7 +19,7 @@ const CartScreen = () => {
                 showsHorizontalScrollIndicator={false}
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    <TopBar name="Monica Gellar" />
+                    <TopBar />
                     <SearchBar placeholder={'Search for items...'} />
                     <View style={{ ...commonStyles.row, ...commonStyles.marginTop20, justifyContent: 'space-between' }}>
                         <Button label={'Daily'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
@@ -55,8 +55,7 @@ const CartScreen = () => {
                     </View>
                 </View>
                 <View style={{ ...commonStyles.row, marginBottom: 50, justifyContent: 'space-between' }}>
-                    <Pressable onPress={() => reactNavigation.navigate('NutritionChartScreen')}
-                    >
+                    <Pressable onPress={() => reactNavigation.navigate('NutritionChartScreen')}>
                         {({ pressed }) => (
                             <Button label={'See Graphs'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />
                         )}

@@ -27,7 +27,7 @@ const InventoryScreen = () => {
                 showsHorizontalScrollIndicator={false}
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    <TopBar name="Monica Gellar" />
+                    <TopBar />
                     <SearchBar placeholder={'Search food from pantry...'} />
                     <InventoryBanner color={colors.richOrange} text="Tracked Items" />
                     <InventoryRow

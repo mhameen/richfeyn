@@ -16,7 +16,7 @@ const CartScreen = () => {
                 showsHorizontalScrollIndicator={false}
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    <TopBar name="Monica Gellar" />
+                    <TopBar />
                     <SearchBar placeholder={'Search for items...'} />
                     <View
                         style={{

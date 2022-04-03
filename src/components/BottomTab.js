@@ -71,7 +71,7 @@ const BottomTab = () => {
             })}
         >
             <Tab.Screen
-                name="Home"
+                name="HomeStack"
                 component={HomeStack}
                 options={{
                     tabBarLabel: 'Home',
@@ -81,7 +81,7 @@ const BottomTab = () => {
                 }}
             />
             <Tab.Screen
-                name="Inventory"
+                name="InventoryStack"
                 component={InventoryScreen}
                 options={{
                     tabBarLabel: 'Inventory',
@@ -91,7 +91,7 @@ const BottomTab = () => {
                 }}
             />
             <Tab.Screen
-                name="Nutrition"
+                name="NutritionStack"
                 component={NutritionScreen}
                 options={{
                     tabBarLabel: 'Nutrition',
@@ -101,7 +101,7 @@ const BottomTab = () => {
                 }}
             />
             <Tab.Screen
-                name="Recipe"
+                name="RecipeStack"
                 component={RecipeScreen}
                 options={{
                     tabBarLabel: 'Recipe',
@@ -111,7 +111,7 @@ const BottomTab = () => {
                 }}
             />
             <Tab.Screen
-                name="Cart"
+                name="CartStack"
                 component={CartScreen}
                 options={{
                     tabBarLabel: 'Cart',

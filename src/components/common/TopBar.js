@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { colors, commonStyles } from '../../assets/styles/common';
 import { Menu, Bell, Bookmark, ShoppingCart } from 'react-native-feather';
 
-const TopBar = ({ name, onPress, modalVisible, setModalVisible, toggleDrawer }) => {
+import { getData } from '../../services/utils';
+
+const TopBar = ({ onPress, modalVisible, setModalVisible, toggleDrawer }) => {
+    const [fullName, setFullName] = useState('');
+    useEffect(() => {}, [getData('full_name').then((name) => setFullName(name))]);
     return (
         <View style={{ ...commonStyles.row, marginBottom: 10, alignItems: 'center' }}>
             <TouchableOpacity
@@ -20,7 +24,7 @@ const TopBar = ({ name, onPress, modalVisible, setModalVisible, toggleDrawer }) 
                 </View>
                 <View style={commonStyles.flexThree}>
                     <Text style={{ color: colors.lightGray }}>Hello</Text>
-                    <Text style={commonStyles.font16}>{name}</Text>
+                    <Text style={commonStyles.font16}>{fullName}</Text>
                 </View>
             </View>
             <View style={styles.notificationContainer}>

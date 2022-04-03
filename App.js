@@ -49,10 +49,10 @@ const App = () => {
             verifyOtp(data).then((response) => {
                 if (response?.data?.header?.status === 200) {
                     const token = response?.data?.body?.token;
+                    const fullName = response?.data?.body?.full_name;
+                    storeData('full_name', fullName);
+                    storeData('token', token);
                     setUserToken(token);
-                    storeData('token', token).then((response) => {
-                        console.log(response);
-                    });
                     setIsLoading(false);
                 }
             });

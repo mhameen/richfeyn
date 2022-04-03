@@ -67,7 +67,7 @@ const CartScreen = () => {
                 showsHorizontalScrollIndicator={false}
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    <TopBar name="Monica Gellar" />
+                    <TopBar />
                     <SearchBar placeholder={'Search for items...'} />
                     <ScrollView horizontal style={{ ...commonStyles.flexOne, marginTop: 28 }}>
                         <RecipeImage imageSrc={require('../../assets/images/recipe.png')} label={'Breakfast'} />
