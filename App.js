@@ -3,9 +3,14 @@
  * @flow strict-local
  */
 import React from 'react';
+<<<<<<< HEAD
 import { useState, useRef, useMemo, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 
+=======
+import 'react-native-gesture-handler';
+import { useState, useRef, useMemo } from 'react';
+>>>>>>> 52ce1cc60d2232808caf8b0f7d685efcd344d315
 import { Text, StatusBar, LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -44,7 +49,6 @@ const App = () => {
     const authContext = useMemo(() => ({
         signIn: async (id, mobile_no, otp) => {
             const data = { id, mobile_no, otp };
-            console.log(data);
             verifyOtp(data).then((response) => {
                 if (response?.data?.header?.status === 200) {
                     const token = response?.data?.body?.token;
@@ -56,12 +60,12 @@ const App = () => {
                 }
             });
         },
-        signOut: () => {
+        signOut: async () => {
             setUserToken();
             deleteData('token');
             setIsLoading(false);
         },
-        signUp: () => {
+        signUp: async () => {
             setUserToken('123');
             setIsLoading(false);
         }

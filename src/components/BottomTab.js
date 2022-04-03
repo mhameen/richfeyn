@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, Image, Picker } from 'react-native';
+import React, { useContext } from 'react';
+import { StyleSheet, Image } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
-// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeScreen from '../screens/HomeStack/HomeScreen';
@@ -29,23 +29,33 @@ import RecipeTab from '../assets/icons/bottomTab/recipeTab.png';
 import ActiveRecipeTab from '../assets/icons/bottomTab/activeRecipeTab.png';
 
 import { heightToDP } from '../services/utils';
+import RetailerListScreen from '../screens/HomeStack/RetailerListScreen';
+import AddressScreen from '../screens/HomeStack/AddressScreen';
+import DeliveryAddressScreen from '../screens/HomeStack/DeliveryAddressScreen';
+import { Fragment } from 'react/cjs/react.production.min';
+import { AuthContext } from '../services/appContext';
 
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 // TODO later move all stack navigation into separate files
-function HomeStack() {
+const HomeStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="HomeScreen" header={false} component={HomeScreen} />
             <Stack.Screen name="ProfileScreen" header={false} component={ProfileScreen} />
+            <Stack.Screen name="DeliveryAddressScreen" header={false} component={DeliveryAddressScreen} />
+            <Stack.Screen name="AddressScreen" header={false} component={AddressScreen} />
+            <Stack.Screen name="RetailerListScreen" header={false} component={RetailerListScreen} />
+            <Stack.Screen name="NotificationScreen" header={false} component={NotificationScreen} />
             <Stack.Screen name="SearchScreen" header={false} component={SearchScreen} />
             <Stack.Screen name="NotificationScreen" header={false} component={NotificationScreen} />
             <Stack.Screen name="WishListScreen" header={false} component={WishListScreen} />
         </Stack.Navigator>
     );
-}
+};
 
 const BottomTab = () => {
     return (
@@ -115,7 +125,48 @@ const BottomTab = () => {
     );
 };
 
-export default BottomTab;
+const DrawerTab = () => {
+    const { signOut } = useContext(AuthContext);
+
+    const CustomDrawerContent = (props) => {
+        return (
+            <DrawerContentScrollView {...props}>
+                <DrawerItemList {...props} />
+                <DrawerItem label="Logout" onPress={() => signOut()} />
+            </DrawerContentScrollView>
+        );
+    };
+
+    return (
+        <Drawer.Navigator
+            initialRouteName="HomeScreen"
+            screenOptions={({ route }) => ({
+                headerShown: false,
+                showLabel: true,
+                tabBarActiveTintColor: 'black',
+                tabBarInactiveTintColor: 'gray'
+            })}
+            drawerContent={(props) => <CustomDrawerContent {...props} />}
+        >
+            <Drawer.Screen
+                name="HomeScreen"
+                component={BottomTab}
+                options={{
+                    title: 'Home',
+                    drawerIcon: ({ focused, size }) =>
+                        focused ? <Image source={ActiveHomeTab} /> : <Image source={HomeTab} />
+                }}
+            />
+            <Drawer.Screen name="My Delivery Address" component={DeliveryAddressScreen} />
+            <Drawer.Screen name="Retailer List" component={RetailerListScreen} />
+            <Drawer.Screen name="My Orders" component={BottomTab} />
+            <Drawer.Screen name="Notifications" component={NotificationScreen} />
+            <Drawer.Screen name="My Wishlist" component={WishListScreen} />
+            {/* <Drawer.Screen name="Logout" component={<Fragment></Fragment>} /> */}
+        </Drawer.Navigator>
+    );
+};
+export default DrawerTab;
 
 const styles = StyleSheet.create({
     color: {
