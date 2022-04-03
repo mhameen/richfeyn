@@ -159,7 +159,13 @@ const LoginScreen = ({ navigation, route }) => {
                                         {otpSent ? (
                                             <View style={{ flex: 2 }}>
                                                 <View style={{ flex: 1, flexDirection: 'row' }}>
-                                                    <View style={{ flex: 1, alignItems: 'center' }}>
+                                                    <View
+                                                        style={{
+                                                            flex: 1,
+                                                            alignItems: 'center',
+                                                            left: 10
+                                                        }}
+                                                    >
                                                         <OTPInputView
                                                             // style={{ width: '80%', height: 200 }}
                                                             pinCount={4}
