@@ -146,9 +146,11 @@ const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <View style={{ flex: 1, marginVertical: 20 }}>
-                            <Text style={{ color: colors.darkGray, fontSize: 32, fontWeight: '500' }}>Cart</Text>
-                        </View>
+                        {cartProducts.length > 0 ? (
+                            <View style={{ flex: 1, marginVertical: 20 }}>
+                                <Text style={{ color: colors.darkGray, fontSize: 32, fontWeight: '500' }}>Cart</Text>
+                            </View>
+                        ) : null}
                         <>
                             {cartProducts.map((item) => {
                                 return (
