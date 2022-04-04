@@ -52,7 +52,8 @@ const LoginScreen = ({ navigation }) => {
                         flex: 1.5,
                         backgroundColor: colors.white,
                         width: '100%',
-                        borderRadius: 60,
+                        borderTopRightRadius: 60,
+                        borderTopLeftRadius: 60,
                         borderWidth: 0.2,
                         borderColor: colors.lightBorder
                     }}
@@ -149,8 +150,8 @@ const LoginScreen = ({ navigation }) => {
                                                     // reactNavigation.navigate('BottomTab');
                                                 }}
                                                 label={'Login'}
-                                                containerStyle={{ width: '70%' }}
-                                                textStyle={{ fontSize: 26, fontWeight: 'bold' }}
+                                                containerStyle={{ width: '70%', alignItems: 'center', justifyContent: 'center' }}
+                                                textStyle={{ fontSize: 24, fontWeight: 'bold' }}
                                             />
                                         </View>
                                     </>
