@@ -30,6 +30,12 @@ const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
         });
     }, []);
 
+    const onSearchPress = () => {
+        navigate('SearchScreen');
+    };
+    const onSearch = (text) => {
+        console.log(text);
+    };
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -56,7 +62,7 @@ const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
                         setModalVisible={setModalVisible}
                         toggleDrawer={toggleDrawer}
                     />
-                    <SearchBar placeholder={'Search food ...'} onPress={() => navigate('SearchScreen')} />
+                    <SearchBar placeholder={'Search food ...'} onPress={onSearchPress} onTextChange={onSearch} />
                     <View
                         style={{
                             ...commonStyles.flexOne,

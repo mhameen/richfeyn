@@ -44,12 +44,18 @@ const SignUpScreen = ({ navigation: { navigate } }) => {
     const handleSignUp = (full_name, mobile_no, email) => {
         const [first_name, last_name] = full_name.split(' ');
         console.log({ first_name, last_name, mobile_no, email });
-        // signUpUser({ first_name, last_name, mobile_no, email }).then((response) => {
-        //     if (response?.data?.header?.status == 400) {
-        //         notifyError(response?.data?.errors?.errorList[0]?.field_error);
-        //     }
-        // });
-        navigate('LoginScreen', { mobile_no, data_id: 10 });
+        signUpUser({ first_name, last_name, mobile_no, email }).then((response) => {
+            if (response?.data?.header?.status == 400) {
+                console.log(response?.data?.errors?.errorList[0]);
+                notifyError(response?.data?.errors?.errorList[0]?.field_error);
+                return;
+            }
+            if (response?.data?.body?.status == 409) {
+                notifyError('User with the same mobile no already exists');
+                return;
+            }
+            navigate('LoginScreen', { mobile_no, data_id: 10 });
+        });
     };
 
     return (
