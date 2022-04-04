@@ -4,30 +4,30 @@ import { Image, View, StyleSheet, Text } from 'react-native';
 import { colors, commonStyles } from '../../assets/styles/common';
 import { ArrowRight } from 'react-native-feather';
 
-const SearchRow = ({ text = '' }) => {
+import { BASE_URL } from '../../services/constants';
+
+const SearchRow = ({ imageUrl, id, name = '' }) => {
     return (
         <View style={{ ...commonStyles.flexOne, marginTop: 10 }}>
             <View style={commonStyles.row}>
-                <View
-                    style={{
-                        height: 120,
-                        width: 100,
-                        backgroundColor: colors.white,
-                        alignItems: 'center',
-                        paddingVertical: 5,
-                        borderRadius: 11,
-                        marginRight: 20
-                    }}
-                >
+                <View style={{ flex: 0.6 }}>
                     <Image
-                        style={styles.image}
-                        source={require('../../assets/images/basmati.png')}
+                        source={imageUrl}
                         resizeMode="contain"
+                        style={{
+                            height: 120,
+                            width: 100,
+                            backgroundColor: colors.white,
+                            alignItems: 'center',
+                            paddingVertical: 5,
+                            borderRadius: 11,
+                            marginRight: 20
+                        }}
                     />
                 </View>
                 <View style={commonStyles.flexOne}>
                     <View style={commonStyles.flexOne}>
-                        <Text style={{ fontSize: 17, color: colors.richBlack }}>Daawat Rozana Gold Basmati Rice</Text>
+                        <Text style={{ fontSize: 17, color: colors.richBlack }}>{name}</Text>
                     </View>
                     <View style={commonStyles.flexOne}>
                         <View

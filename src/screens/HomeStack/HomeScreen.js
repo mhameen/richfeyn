@@ -20,6 +20,7 @@ import { BASE_URL } from '../../services/constants';
 const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [cartProducts, setCartProducts] = useState([]);
+    const [searchText, setSearchText] = useState('');
 
     useEffect(() => {
         getUserCart().then((response) => {
@@ -31,11 +32,13 @@ const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
     }, []);
 
     const onSearchPress = () => {
-        navigate('SearchScreen');
+        navigate('SearchScreen', { searchText: searchText });
     };
+
     const onSearch = (text) => {
-        console.log(text);
+        setSearchText(text);
     };
+
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView

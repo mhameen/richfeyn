@@ -4,12 +4,13 @@ import { TextInput, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '../../assets/styles/common';
 import { Search } from 'react-native-feather';
 
-const SearchTab = ({ placeholder, onPress, onTextChange }) => {
+const SearchTab = ({ placeholder, onPress, onTextChange, textValue }) => {
     return (
         <View style={styles.view}>
             <TextInput
                 placeholder={placeholder}
                 style={styles.textInput}
+                value={textValue}
                 onChangeText={(value) => {
                     onTextChange(value);
                 }}

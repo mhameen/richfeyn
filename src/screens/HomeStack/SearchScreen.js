@@ -1,7 +1,5 @@
-import React from 'react';
-import { Image, ScrollView, StyleSheet, View, SafeAreaView, Text } from 'react-native';
-
-import { ArrowRight } from 'react-native-feather';
+import React, { useState, useEffect } from 'react';
+import { ScrollView, StyleSheet, View, SafeAreaView, Text } from 'react-native';
 
 import SearchBar from '../../components/common/SearchBar';
 
@@ -11,7 +9,23 @@ import { reactNavigation } from '../../services/index';
 import ScreenHeader from '../../components/common/ScreenHeader';
 import SearchRow from '../../components/common/SearchRow';
 
-const SearchScreen = () => {
+import { getProducts } from '../../services/api';
+import { BASE_URL } from '../../services/constants';
+
+const SearchScreen = ({ route }) => {
+    const [search, setSearch] = useState();
+    const [searchResults, setSearchResults] = useState([]);
+
+    useEffect(() => {
+        setSearch(route?.params?.searchText);
+    }, []);
+
+    useEffect(() => {
+        getProducts((page = 1), (pageSize = 10), (query = search)).then((response) => {
+            setSearchResults(response?.data?.body?.results);
+        });
+    }, [search]);
+
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -23,7 +37,11 @@ const SearchScreen = () => {
                     {/* <TopBar  /> */}
                     <ScreenHeader text="Search" />
                     <SearchBar
-                        placeholder={'Search food ...'}
+                        placeholder={'Search Food..'}
+                        textValue={search}
+                        onTextChange={(value) => {
+                            setSearch(value);
+                        }}
                         onPress={() => reactNavigation.navigate('SignUpScreen')}
                     />
                     <View
@@ -36,13 +54,13 @@ const SearchScreen = () => {
                             justifyContent: 'center'
                         }}
                     >
-                        <Text style={{ color: colors.darkGray }}>100 products found</Text>
+                        <Text style={{ color: colors.darkGray }}>{searchResults.length} products found</Text>
                     </View>
                     <View style={{ flex: 1 }}>
                         <View style={commonStyles.flexOne}>
-                            <SearchRow />
-                            <SearchRow />
-                            <SearchRow />
+                            {searchResults.map((item) => {
+                                return <SearchRow name={item?.name} imageUrl={{ uri: BASE_URL + item?.mobile_img }} />;
+                            })}
                         </View>
                     </View>
                 </View>

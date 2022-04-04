@@ -7,7 +7,7 @@ import TopBar from '../../components/common/TopBar';
 
 import { commonStyles } from '../../assets/styles/common';
 
-const CartScreen = () => {
+const CartScreen = ({ navigation: { toggleDrawer } }) => {
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -16,7 +16,7 @@ const CartScreen = () => {
                 showsHorizontalScrollIndicator={false}
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    <TopBar />
+                    <TopBar toggleDrawer={toggleDrawer} />
                     <SearchBar placeholder={'Search for items...'} />
                     <View
                         style={{

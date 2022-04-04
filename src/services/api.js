@@ -32,3 +32,12 @@ export const updateUser = (id, data) => {
         return resp;
     });
 };
+
+// api to cart for a given user
+export const getProducts = (pageNo = 1, pageSize = 10, query = '', status = 'CART') => {
+    const apiPath = `/product/list/?page=${pageNo}&page_size=${pageSize}&q=${query}&status=${status}`;
+    const response = makeAuthenticatedGetCall(apiPath, true);
+    return handleResponse(response, false).then((resp) => {
+        return resp;
+    });
+};

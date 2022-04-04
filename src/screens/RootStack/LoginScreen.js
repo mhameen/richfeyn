@@ -66,8 +66,6 @@ const LoginScreen = ({ navigation, route }) => {
         });
     };
 
-    console.log(route);
-
     useEffect(() => {
         if (route?.params?.data_id) {
             setOTPId(route?.params?.data_id);
