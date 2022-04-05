@@ -10,7 +10,7 @@ import Button from '../../components/common/Button';
 
 import { commonStyles } from '../../assets/styles/common';
 
-const CartScreen = ({ navigation: { toggleDrawer } }) => {
+const NutritionScreen = ({ navigation: { toggleDrawer } }) => {
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -67,4 +67,4 @@ const CartScreen = ({ navigation: { toggleDrawer } }) => {
     );
 };
 
-export default CartScreen;
+export default NutritionScreen;

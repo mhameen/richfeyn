@@ -5,6 +5,7 @@ import SearchBar from '../../components/common/SearchBar';
 import TopBar from '../../components/common/TopBar';
 import InventoryRow from '../../components/common/InventoryRow';
 import Button from '../../components/common/Button';
+import { reactNavigation } from '../../services/index';
 
 import { commonStyles, colors } from '../../assets/styles/common';
 
@@ -36,6 +37,7 @@ const InventoryScreen = ({ navigation: { toggleDrawer } }) => {
                         itemName={'India Gate Basmati Rice Bag'}
                         itemUnit={'5 kg'}
                         inCart
+                        navigateTo={'ProductDetailsScreen'}
                     />
                     <InventoryRow
                         imagePath={require('../../assets/images/tomatoes.png')}

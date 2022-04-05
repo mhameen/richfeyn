@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, Image, View, StyleSheet } from 'react-native';
+import { Text, Image, View, StyleSheet, Pressable } from 'react-native';
 
 import Button from './Button';
 
 import { colors, commonStyles } from '../../assets/styles/common';
+import { reactNavigation } from '../../services/index.js';
 
-const InventoryRow = ({ imagePath, itemUnit, itemName, retailerPath, inCart }) => {
+const InventoryRow = ({ imagePath, itemUnit, itemName, retailerPath, inCart, navigateTo }) => {
     const containerStyle = {
         ...styles.cartLabel,
         backgroundColor: inCart ? colors.richBlack : colors.white,
@@ -13,7 +14,7 @@ const InventoryRow = ({ imagePath, itemUnit, itemName, retailerPath, inCart }) =
     };
     const textStyle = { color: inCart ? colors.white : colors.richBlack, fontSize: 14 };
     return (
-        <View style={styles.mainContainer}>
+        <Pressable style={styles.mainContainer} onPress={()=>reactNavigation.navigate(navigateTo)}>
             <View style={{ ...commonStyles.row }}>
                 <View style={{ flex: 1, padding: 12, marginRight: 10 }}>
                     <Image style={{ width: 80 }} resizeMode="contain" source={imagePath} />
@@ -37,7 +38,7 @@ const InventoryRow = ({ imagePath, itemUnit, itemName, retailerPath, inCart }) =
                     </View>
                 </View>
             </View>
-        </View>
+        </Pressable>
     );
 };
 
