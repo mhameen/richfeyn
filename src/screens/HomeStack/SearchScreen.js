@@ -12,13 +12,13 @@ import SearchRow from '../../components/common/SearchRow';
 import { getProducts } from '../../services/api';
 import { BASE_URL } from '../../services/constants';
 
-const SearchScreen = ({ route }) => {
-    const [search, setSearch] = useState();
+const SearchScreen = ({ route, navigation: { navigate } }) => {
+    const [search, setSearch] = useState(route?.params?.searchText);
     const [searchResults, setSearchResults] = useState([]);
 
-    useEffect(() => {
-        setSearch(route?.params?.searchText);
-    }, []);
+    // useEffect(() => {
+    //     setSearch(route?.params?.searchText);
+    // }, []);
 
     useEffect(() => {
         getProducts((page = 1), (pageSize = 10), (query = search)).then((response) => {
@@ -59,7 +59,14 @@ const SearchScreen = ({ route }) => {
                     <View style={{ flex: 1 }}>
                         <View style={commonStyles.flexOne}>
                             {searchResults.map((item) => {
-                                return <SearchRow name={item?.name} imageUrl={{ uri: BASE_URL + item?.mobile_img }} />;
+                                return (
+                                    <SearchRow
+                                        name={item?.name}
+                                        imageUrl={{ uri: BASE_URL + item?.mobile_img }}
+                                        key={item.id}
+                                        onPress={() => navigate('ProductDetailsScreen', { productId: item.id })}
+                                    />
+                                );
                             })}
                         </View>
                     </View>

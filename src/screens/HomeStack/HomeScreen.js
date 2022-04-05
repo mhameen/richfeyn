@@ -32,7 +32,7 @@ const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
     }, []);
 
     const onSearchPress = () => {
-        navigate('SearchScreen', { searchText: searchText });
+        navigate('SearchScreen', { searchText: searchText, nextScreen: 'ProductDetailsScreen' });
     };
 
     const onSearch = (text) => {

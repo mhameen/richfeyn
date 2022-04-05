@@ -54,6 +54,7 @@ const HomeStack = () => {
             <Stack.Screen name="NotificationScreen" header={false} component={NotificationScreen} />
             <Stack.Screen name="SearchScreen" header={false} component={SearchScreen} />
             <Stack.Screen name="WishListScreen" header={false} component={WishListScreen} />
+            <Stack.Screen name="ProductDetailsScreen" header={false} component={ProductDetailsScreen} />
         </Stack.Navigator>
     );
 };
