@@ -33,10 +33,28 @@ export const updateUser = (id, data) => {
     });
 };
 
-// api to cart for a given user
-export const getProducts = (pageNo = 1, pageSize = 10, query = '', status = 'CART') => {
-    const apiPath = `/product/list/?page=${pageNo}&page_size=${pageSize}&q=${query}&status=${status}`;
+// api to get cart for a given user
+export const getProducts = (pageNo = 1, pageSize = 10, query = '', id = '', status = 'CART') => {
+    const apiPath = `/product/list/?page=${pageNo}&page_size=${pageSize}&q=${query}&status=${status}&id=${id}`;
     const response = makeAuthenticatedGetCall(apiPath, true);
+    return handleResponse(response, false).then((resp) => {
+        return resp;
+    });
+};
+
+// api to add item to cart for a given user
+export const addToCart = (data) => {
+    const apiPath = `/cart/`;
+    const response = makeAuthenticatedPostCall(apiPath, data);
+    return handleResponse(response, false).then((resp) => {
+        return resp;
+    });
+};
+
+// api to get user cart
+export const userCart = () => {
+    const apiPath = `/cart/`;
+    const response = makeAuthenticatedGetCall(apiPath);
     return handleResponse(response, false).then((resp) => {
         return resp;
     });

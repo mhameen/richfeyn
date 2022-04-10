@@ -1,4 +1,6 @@
 import Toast from 'react-native-toast-message';
+import { storeData, getData, deleteData } from '../../src/services/utils';
+import { navigate } from '../../src/services/reactNavigation';
 
 const RESPONSE_CODES = {
     success: [200],
@@ -46,19 +48,24 @@ export default function handleResponse(result, showToast = true, download = fals
         .catch((error) => {
             console.log(error, 'error response');
             if (!error.response) {
-                // history.push('/misc/error/500');
+                navigate('LoginScreen');
+                deleteData('token');
+                deleteData('full_name');
+                deleteData('uuid');
                 return error;
             }
             if (error.response.status === 401) {
-                notifyError('You are not authorized to view this content');
-                // localStorage.removeItem('userData');
-                // localStorage.removeItem('access_token');
-                // localStorage.removeItem("refresh_token");
-                // setTimeout(() => {
-                //     history.push('/login');
-                // }, 2000);
+                notifyError('You are not authorized to view this content!');
+                navigate('LoginScreen');
+                deleteData('token');
+                deleteData('full_name');
+                deleteData('uuid');
                 return error.response;
             } else if (error.response && RESPONSE_CODES.failure.includes(error.response.data.code)) {
+                navigate('LoginScreen');
+                deleteData('token');
+                deleteData('full_name');
+                deleteData('uuid');
                 if (showToast) {
                     notifyError(error.response.data.response);
                 }

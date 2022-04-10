@@ -1,5 +1,5 @@
-// const BASE_URL = "http://fasterthanlight.in:9000";
-// export const STATIC_URL = "http://fasterthanlight.in:9000/static/";
+// const BASE_URL = 'https://api.richfeyn.com';
+// export const STATIC_URL = 'https://api.richfeyn.com/static/';
 
 export const BASE_URL = 'http://0.0.0.0:8000';
 export const STATIC_URL = 'http://0.0.0.0:8000/static';

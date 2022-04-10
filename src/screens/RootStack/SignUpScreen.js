@@ -54,7 +54,7 @@ const SignUpScreen = ({ navigation: { navigate } }) => {
                 notifyError('User with the same mobile no already exists');
                 return;
             }
-            navigate('LoginScreen', { mobile_no, data_id: 10 });
+            navigate('LoginScreen', { mobile_no, data_id: response?.data?.body?.data_id });
         });
     };
 

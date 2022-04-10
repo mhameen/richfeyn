@@ -46,7 +46,7 @@ const otpSchema = formSchema.shape({
         .max(4, 'Must be exactly 4 digits')
 });
 
-const LoginScreen = ({ navigation, route }) => {
+const LoginScreen = ({ route }) => {
     const { signIn } = useContext(AuthContext);
     const [otpSent, setOTPSent] = useState(false);
     const [otpId, setOTPId] = useState();

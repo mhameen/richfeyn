@@ -1,15 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, View, SafeAreaView, Text, Image } from 'react-native';
 import Slider from 'react-native-slider';
 
+import { getProducts, addToCart } from '../../services/api';
 import { commonStyles, colors } from '../../assets/styles/common';
 import ScreenHeader from '../../components/common/ScreenHeader';
 import { CheckSquare, Square } from 'react-native-feather';
+import { BASE_URL } from '../../services/constants';
+import Button from '../../components/common/Button';
+import { notifySuccess, notifyError } from '../../services/handler';
 
-const ProductDetailsScreen = () => {
+const ProductDetailsScreen = ({ route }) => {
     const [threshold, setThreshold] = useState(false);
     const [expiry, setExpiry] = useState(false);
     const [cart, setCart] = useState(false);
+    const [product, setProduct] = useState([]);
+    const [productId, setProductId] = useState(route?.params?.productId);
+
+    useEffect(() => {
+        getProducts((page = 1), (pageSize = 10), (query = ''), (id = productId)).then((response) => {
+            setProduct(response?.data?.body?.results[0]);
+            console.log(response?.data?.body?.results);
+        });
+    }, [productId]);
+
+    const handleCart = () => {
+        const data = { product: product?.id, quantity: 1, item_type: 'CART' };
+        console.log(data);
+        addToCart(data).then((response) => {
+            if (response?.data?.body?.status === 200) {
+                notifySuccess(response?.data?.body?.msg);
+            } else {
+                notifyError('We could not add item to the cart!');
+            }
+        });
+    };
+
+    const imageUrl = { uri: BASE_URL + product?.mobile_img };
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -28,9 +55,7 @@ const ProductDetailsScreen = () => {
                                 marginTop: 14
                             }}
                         >
-                            <Text style={{ color: 'black', fontWeight: '500', fontSize: 17 }}>
-                                India Gate Basmati Rice Bag
-                            </Text>
+                            <Text style={{ color: 'black', fontWeight: '500', fontSize: 17 }}>{product?.name}</Text>
                             <View
                                 style={{
                                     backgroundColor: '#629460',
@@ -45,7 +70,15 @@ const ProductDetailsScreen = () => {
                             </View>
                         </View>
                         <View style={styles.imgBackground}>
-                            <Image source={require('../../assets/images/basmati.png')} />
+                            <Image
+                                source={imageUrl}
+                                resizeMode="contain"
+                                style={{
+                                    height: 120,
+                                    width: 100,
+                                    alignItems: 'center'
+                                }}
+                            />
                         </View>
                         <View
                             style={{
@@ -302,6 +335,9 @@ const ProductDetailsScreen = () => {
                                 marginBottom: 15
                             }}
                         />
+                    </View>
+                    <View style={{ marginHorizontal: 10, marginBottom: 30 }}>
+                        <Button label={'Add Item to Cart'} onPress={handleCart} />
                     </View>
                 </View>
             </ScrollView>

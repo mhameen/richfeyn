@@ -47,10 +47,12 @@ const App = () => {
         signIn: async (id, mobile_no, otp) => {
             const data = { id, mobile_no, otp };
             verifyOtp(data).then((response) => {
+                console.log(response);
                 if (response?.data?.header?.status === 200) {
                     const token = response?.data?.body?.token;
                     const fullName = response?.data?.body?.full_name;
                     const uuid = response?.data?.body?.uuid;
+                    console.log(fullName, uuid, token);
                     storeData('full_name', fullName);
                     storeData('token', token);
                     storeData('uuid', toString(uuid));
@@ -60,7 +62,7 @@ const App = () => {
             });
         },
         signOut: async () => {
-            setUserToken();
+            setUserToken('');
             deleteData('token');
             deleteData('full_name');
             deleteData('uuid');

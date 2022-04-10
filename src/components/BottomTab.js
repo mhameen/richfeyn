@@ -32,7 +32,6 @@ import { heightToDP } from '../services/utils';
 import RetailerListScreen from '../screens/HomeStack/RetailerListScreen';
 import AddressScreen from '../screens/HomeStack/AddressScreen';
 import DeliveryAddressScreen from '../screens/HomeStack/DeliveryAddressScreen';
-import { Fragment } from 'react/cjs/react.production.min';
 import { AuthContext } from '../services/appContext';
 import DrawerScreen from '../screens/HomeStack/DrawerScreen';
 import ProductDetailsScreen from '../screens/InventoryStack/ProductDetailsScreen';
@@ -158,24 +157,13 @@ const DrawerTab = () => {
                 tabBarInactiveTintColor: 'gray'
             })}
             drawerContent={(props) => <CustomDrawerContent {...props} />}
-            // drawerContent={(props) => <DrawerScreen {...props} />}
         >
-            {/* <Drawer.Screen
-                name="HomeScreen"
-                component={BottomTab}
-                options={{
-                    title: 'Home',
-                    drawerIcon: ({ focused, size }) =>
-                        focused ? <Image source={ActiveHomeTab} /> : <Image source={HomeTab} />
-                }}
-            /> */}
             <Drawer.Screen name="My Orders" component={BottomTab} />
             <Drawer.Screen name="My Profile" component={ProfileScreen} />
             <Drawer.Screen name="My Delivery Address" component={DeliveryAddressScreen} />
             <Drawer.Screen name="Retailer List" component={RetailerListScreen} />
             <Drawer.Screen name="Notifications" component={NotificationScreen} />
             <Drawer.Screen name="My Wishlist" component={WishListScreen} />
-            {/* <Drawer.Screen name="Logout" component={<Fragment></Fragment>} /> */}
         </Drawer.Navigator>
     );
 };

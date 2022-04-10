@@ -5,10 +5,17 @@ import { colors, commonStyles } from '../../assets/styles/common';
 import { Menu, Bell, Bookmark, ShoppingCart } from 'react-native-feather';
 
 import { getData } from '../../services/utils';
+import { userCart } from '../../services/api';
 
 const TopBar = ({ onPress, modalVisible, setModalVisible, toggleDrawer }) => {
     const [fullName, setFullName] = useState('');
+    const [cartCount, setCartCount] = useState(0);
     useEffect(() => {}, [getData('full_name').then((name) => setFullName(name))]);
+    useEffect(() => {
+        userCart().then((response) => {
+            setCartCount(response?.data?.body?.count);
+        });
+    }, []);
     return (
         <View style={{ ...commonStyles.row, marginBottom: 10, alignItems: 'center' }}>
             <TouchableOpacity
@@ -33,6 +40,21 @@ const TopBar = ({ onPress, modalVisible, setModalVisible, toggleDrawer }) => {
                 </TouchableOpacity>
                 <Bookmark color={colors.richBlack} />
                 <ShoppingCart color={colors.richBlack} />
+                <View
+                    style={{
+                        backgroundColor: 'red',
+                        width: 16,
+                        height: 16,
+                        borderRadius: 8,
+                        borderWidth: 0.2,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        top: -4,
+                        left: -8
+                    }}
+                >
+                    <Text style={{ color: colors.white }}>{cartCount}</Text>
+                </View>
             </View>
         </View>
     );
