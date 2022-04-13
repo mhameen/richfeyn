@@ -6,15 +6,6 @@ import {
     makeAuthenticatedDeleteCall
 } from './utils';
 
-// api to cart for a given user
-export const getUserCart = (pageNo = 1, pageSize = 10, query = '', status = 'CART') => {
-    const apiPath = `/cart/?page=${pageNo}&page_size=${pageSize}&q=${query}&status=${status}`;
-    const response = makeAuthenticatedGetCall(apiPath, true);
-    return handleResponse(response, false).then((resp) => {
-        return resp;
-    });
-};
-
 // to create a given user
 export const createUser = (data) => {
     const apiPath = `/users/`;
@@ -51,10 +42,28 @@ export const addToCart = (data) => {
     });
 };
 
-// api to get user cart
-export const userCart = () => {
-    const apiPath = `/cart/`;
-    const response = makeAuthenticatedGetCall(apiPath);
+// api to cart for a given user
+export const getUserCart = (pageNo = 1, pageSize = 10, query = '', status = 'CART') => {
+    const apiPath = `/cart/?page=${pageNo}&page_size=${pageSize}&q=${query}&status=${status}`;
+    const response = makeAuthenticatedGetCall(apiPath, true);
+    return handleResponse(response, false).then((resp) => {
+        return resp;
+    });
+};
+
+// api to update user cart
+export const updateWishList = (id, data) => {
+    const apiPath = `/wishlist/${id}/`;
+    const response = makeAuthenticatedPostCall(apiPath, data);
+    return handleResponse(response, false).then((resp) => {
+        return resp;
+    });
+};
+
+// api to delete user cart
+export const deleteItemCart = (id) => {
+    const apiPath = `/cart/delete/${id}/`;
+    const response = makeAuthenticatedDeleteCall(apiPath);
     return handleResponse(response, false).then((resp) => {
         return resp;
     });

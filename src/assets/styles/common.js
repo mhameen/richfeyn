@@ -46,6 +46,9 @@ export const commonStyles = StyleSheet.create({
         flexDirection: 'row',
         flex: 1
     },
+    marginRight10: {
+        marginRight: 10
+    },
     marginTop10: {
         marginTop: 10
     },

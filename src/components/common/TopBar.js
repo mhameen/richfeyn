@@ -3,16 +3,17 @@ import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { colors, commonStyles } from '../../assets/styles/common';
 import { Menu, Bell, Bookmark, ShoppingCart } from 'react-native-feather';
-
+import { navigate } from '../../services/reactNavigation';
 import { getData } from '../../services/utils';
-import { userCart } from '../../services/api';
+import { getUserCart } from '../../services/api';
 
 const TopBar = ({ onPress, modalVisible, setModalVisible, toggleDrawer }) => {
     const [fullName, setFullName] = useState('');
     const [cartCount, setCartCount] = useState(0);
+
     useEffect(() => {}, [getData('full_name').then((name) => setFullName(name))]);
     useEffect(() => {
-        userCart().then((response) => {
+        getUserCart().then((response) => {
             setCartCount(response?.data?.body?.count);
         });
     }, []);
@@ -39,22 +40,29 @@ const TopBar = ({ onPress, modalVisible, setModalVisible, toggleDrawer }) => {
                     <Bell color={colors.richBlack} />
                 </TouchableOpacity>
                 <Bookmark color={colors.richBlack} />
-                <ShoppingCart color={colors.richBlack} />
-                <View
-                    style={{
-                        backgroundColor: 'red',
-                        width: 16,
-                        height: 16,
-                        borderRadius: 8,
-                        borderWidth: 0.2,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        top: -4,
-                        left: -8
+                <TouchableOpacity
+                    onPress={() => {
+                        navigate('CartStack');
                     }}
+                    style={{ flexDirection: 'row' }}
                 >
-                    <Text style={{ color: colors.white }}>{cartCount}</Text>
-                </View>
+                    <ShoppingCart color={colors.richBlack} />
+                    <View
+                        style={{
+                            backgroundColor: 'red',
+                            width: 16,
+                            height: 16,
+                            borderRadius: 8,
+                            borderWidth: 0.2,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            top: -4,
+                            left: -8
+                        }}
+                    >
+                        <Text style={{ color: colors.white }}>{cartCount}</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         </View>
     );

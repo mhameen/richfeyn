@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Counter from 'react-native-counters';
 import { Image, View, Text, StyleSheet } from 'react-native';
 
-import { colors, commonStyles } from '../../assets/styles/common';
 import { Bookmark, Minus, Plus, Trash } from 'react-native-feather';
-import Counter from 'react-native-counters';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const CartRow = ({ name, imageSrc, weight, price, unit, quantity = 1 }) => {
+import { updateWishList } from '../../services/api';
+import { colors, commonStyles } from '../../assets/styles/common';
+
+const CartRow = ({ trashAction, name, imageSrc, weight, price, unit, quantity = 1, isWishlist = false, dataId }) => {
+    const [isWish, setWishList] = useState(isWishlist);
+
     const minusIcon = () => {
         return <Minus width={16} color={colors.richBlack} />;
     };
 
     const plusIcon = () => {
         return <Plus name="plus" width={16} color={colors.richBlack} />;
+    };
+
+    const handleWishList = () => {
+        const body = { id: dataId, is_wishlist: !isWish };
+        updateWishList(dataId, body).then((response) => {
+            if (response?.data?.header?.status === 200) {
+                setWishList(!isWish);
+            }
+        });
     };
 
     return (
@@ -30,9 +44,9 @@ const CartRow = ({ name, imageSrc, weight, price, unit, quantity = 1 }) => {
                         <View style={commonStyles.flexFour}>
                             <Text style={{ fontSize: 19, fontWeight: '400' }}>{name}</Text>
                         </View>
-                        <View style={commonStyles.flexHalf}>
-                            <Bookmark color={colors.richBlack} />
-                        </View>
+                        <TouchableOpacity style={commonStyles.flexHalf} onPress={handleWishList}>
+                            <Bookmark color={colors.richBlack} fill={isWish ? colors.richBlack : colors.white} />
+                        </TouchableOpacity>
                     </View>
                     <View style={commonStyles.flexTwo}>
                         <View style={commonStyles.flexTwo}>
@@ -66,9 +80,14 @@ const CartRow = ({ name, imageSrc, weight, price, unit, quantity = 1 }) => {
                             <View style={commonStyles.flexFour}>
                                 <Text style={{ fontSize: 17 }}>₹ {price}/-</Text>
                             </View>
-                            <View style={commonStyles.flexHalf}>
+                            <TouchableOpacity
+                                style={commonStyles.flexHalf}
+                                onPress={() => {
+                                    trashAction(dataId);
+                                }}
+                            >
                                 <Trash color={colors.richBlack} />
-                            </View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
