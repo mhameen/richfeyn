@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, SafeAreaView } from 'react-native';
+import { ScrollView, View, SafeAreaView, Text } from 'react-native';
 
 import CartRow from '../../components/common/CartRow';
 import CustomModal from '../../components/common/CustomModal';
@@ -71,20 +71,24 @@ const CartScreen = ({ navigation: { toggleDrawer } }) => {
                             ...commonStyles.marginTop10
                         }}
                     >
-                        {cartItems.map((item) => {
-                            return (
-                                <CartRow
-                                    name={item?.product?.name}
-                                    imageSrc={{ uri: BASE_URL + item?.product?.mobile_img }}
-                                    quantity={item?.quantity}
-                                    price={item?.product?.price}
-                                    isWishlist={item?.is_wishlist}
-                                    dataId={item.id}
-                                    key={item.id}
-                                    trashAction={trashAction}
-                                />
-                            );
-                        })}
+                        {cartItems.length > 0 ? (
+                            cartItems.map((item) => {
+                                return (
+                                    <CartRow
+                                        name={item?.product?.name}
+                                        imageSrc={{ uri: BASE_URL + item?.product?.mobile_img }}
+                                        quantity={item?.quantity}
+                                        price={item?.product?.price}
+                                        isWishlist={item?.is_wishlist}
+                                        dataId={item.id}
+                                        key={item.id}
+                                        trashAction={trashAction}
+                                    />
+                                );
+                            })
+                        ) : (
+                            <Text style={{ fontSize: 16 }}>No item found</Text>
+                        )}
                         {/* <CartRow name={'Penne Pasta'} imageSrc={require('../../assets/images/pasta.png')} />
                         <CartRow name={'Penne Pasta'} imageSrc={require('../../assets/images/pasta.png')} /> */}
                     </View>

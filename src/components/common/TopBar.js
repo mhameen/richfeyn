@@ -17,6 +17,7 @@ const TopBar = ({ onPress, modalVisible, setModalVisible, toggleDrawer }) => {
             setCartCount(response?.data?.body?.count);
         });
     }, []);
+
     return (
         <View style={{ ...commonStyles.row, marginBottom: 10, alignItems: 'center' }}>
             <TouchableOpacity
@@ -47,21 +48,25 @@ const TopBar = ({ onPress, modalVisible, setModalVisible, toggleDrawer }) => {
                     style={{ flexDirection: 'row' }}
                 >
                     <ShoppingCart color={colors.richBlack} />
-                    <View
-                        style={{
-                            backgroundColor: 'red',
-                            width: 16,
-                            height: 16,
-                            borderRadius: 8,
-                            borderWidth: 0.2,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            top: -4,
-                            left: -8
-                        }}
-                    >
-                        <Text style={{ color: colors.white }}>{cartCount}</Text>
-                    </View>
+                    {cartCount ? (
+                        <View
+                            style={{
+                                backgroundColor: 'red',
+                                width: 16,
+                                height: 16,
+                                borderRadius: 8,
+                                borderWidth: 0.2,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                top: -4,
+                                left: -8
+                            }}
+                        >
+                            <Text style={{ color: colors.white }}>{cartCount}</Text>
+                        </View>
+                    ) : (
+                        <></>
+                    )}
                 </TouchableOpacity>
             </View>
         </View>

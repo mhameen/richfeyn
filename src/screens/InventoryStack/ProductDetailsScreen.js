@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, View, SafeAreaView, Text, Image } from 'react-native';
 import Slider from 'react-native-slider';
+import { Bookmark } from 'react-native-feather';
 
-import { getProducts, addToCart } from '../../services/api';
+import { getProducts, addToCart, addToWishlist } from '../../services/api';
 import { commonStyles, colors } from '../../assets/styles/common';
 import ScreenHeader from '../../components/common/ScreenHeader';
 import { CheckSquare, Square } from 'react-native-feather';
 import { BASE_URL } from '../../services/constants';
 import Button from '../../components/common/Button';
 import { notifySuccess, notifyError } from '../../services/handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ProductDetailsScreen = ({ route }) => {
     const [threshold, setThreshold] = useState(false);
@@ -16,22 +18,38 @@ const ProductDetailsScreen = ({ route }) => {
     const [cart, setCart] = useState(false);
     const [product, setProduct] = useState([]);
     const [productId, setProductId] = useState(route?.params?.productId);
+    const [isWish, setWishList] = useState(false);
 
     useEffect(() => {
         getProducts((page = 1), (pageSize = 10), (query = ''), (id = productId)).then((response) => {
-            setProduct(response?.data?.body?.results[0]);
-            console.log(response?.data?.body?.results);
+            const data = response?.data?.body?.results;
+            if (data.length > 0) {
+                setProduct(data[0]);
+                setWishList(data[0].is_wishlist);
+            }
         });
     }, [productId]);
 
     const handleCart = () => {
         const data = { product: product?.id, quantity: 1, item_type: 'CART' };
-        console.log(data);
         addToCart(data).then((response) => {
             if (response?.data?.body?.status === 200) {
                 notifySuccess(response?.data?.body?.msg);
             } else {
                 notifyError('We could not add item to the cart!');
+            }
+        });
+    };
+
+    const handleWishList = () => {
+        const data = { product: product?.id, quantity: 1, is_wishlist: true };
+        addToWishlist(product?.id, data).then((response) => {
+            console.log(response?.data?.body);
+            if (response?.data?.body?.status === 200) {
+                notifySuccess(response?.data?.body?.msg);
+                setWishList(!isWish);
+            } else {
+                notifyError('We could not add item to the wishlist!');
             }
         });
     };
@@ -63,11 +81,15 @@ const ProductDetailsScreen = ({ route }) => {
                                     paddingHorizontal: 10,
                                     flexDirection: 'row',
                                     marginLeft: 'auto',
-                                    borderRadius: 3
+                                    borderRadius: 3,
+                                    marginRight: 10
                                 }}
                             >
                                 <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 12 }}>Tracked</Text>
                             </View>
+                            <TouchableOpacity onPress={handleWishList}>
+                                <Bookmark color={colors.richBlack} fill={isWish ? colors.richBlack : colors.white} />
+                            </TouchableOpacity>
                         </View>
                         <View style={styles.imgBackground}>
                             <Image
@@ -97,7 +119,7 @@ const ProductDetailsScreen = ({ route }) => {
                             }}
                         >
                             <Text style={{ fontWeight: '500', color: '#130F26', fontSize: 17 }}>
-                                Threshold Quantity:
+                                Threshold Quantity:{product?.id}
                             </Text>
                             <View
                                 style={{

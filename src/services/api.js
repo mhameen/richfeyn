@@ -42,7 +42,7 @@ export const addToCart = (data) => {
     });
 };
 
-// api to cart for a given user
+// api to add item to cart for a given user
 export const getUserCart = (pageNo = 1, pageSize = 10, query = '', status = 'CART') => {
     const apiPath = `/cart/?page=${pageNo}&page_size=${pageSize}&q=${query}&status=${status}`;
     const response = makeAuthenticatedGetCall(apiPath, true);
@@ -64,6 +64,24 @@ export const updateWishList = (id, data) => {
 export const deleteItemCart = (id) => {
     const apiPath = `/cart/delete/${id}/`;
     const response = makeAuthenticatedDeleteCall(apiPath);
+    return handleResponse(response, false).then((resp) => {
+        return resp;
+    });
+};
+
+// api to add item to wishlist for a given user
+export const addToWishlist = (id, data) => {
+    const apiPath = `/wishlist/${id}/`;
+    const response = makeAuthenticatedPostCall(apiPath, data);
+    return handleResponse(response, false).then((resp) => {
+        return resp;
+    });
+};
+
+// api to get wishlist for a given user
+export const getWishlistCart = (pageNo = 1, pageSize = 10, query = '', status = 'WISHLIST') => {
+    const apiPath = `/wishlist/?page=${pageNo}&page_size=${pageSize}&q=${query}&status=${status}`;
+    const response = makeAuthenticatedGetCall(apiPath, true);
     return handleResponse(response, false).then((resp) => {
         return resp;
     });

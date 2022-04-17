@@ -1,15 +1,30 @@
-import React from 'react';
-import { Image, ScrollView, StyleSheet, View, SafeAreaView, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { ScrollView, StyleSheet, View, SafeAreaView } from 'react-native';
 
 import { ShoppingCart } from 'react-native-feather';
 
 import { commonStyles, colors } from '../../assets/styles/common';
-import { reactNavigation } from '../../services/index';
+import { getWishlistCart } from '../../services/api';
 
 import ScreenHeader from '../../components/common/ScreenHeader';
 import CardItems from '../../components/common/CardItems';
+import { BASE_URL } from '../../services/constants';
 
 const WishListScreen = () => {
+    const [wishListItems, setWishList] = useState([]);
+
+    useEffect(() => {
+        getWishlistCart((page = 1), (pageSize = 50), (query = '')).then((response) => {
+            const data = response?.data?.body?.results;
+            if (data.length > 0) {
+                const result = data.reduce(function (rows, key, index) {
+                    return (index % 2 == 0 ? rows.push([key]) : rows[rows.length - 1].push(key)) && rows;
+                }, []);
+                setWishList(result);
+            }
+        });
+    }, []);
+
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -22,18 +37,40 @@ const WishListScreen = () => {
                         <ScreenHeader text="WishList" />
                         <ShoppingCart color={colors.richBlack} />
                     </View>
-                    <View style={styles.itemCard}>
-                        <CardItems />
-                        <CardItems />
-                    </View>
-                    <View style={styles.itemCard}>
-                        <CardItems />
-                        <CardItems />
-                    </View>
-                    <View style={styles.itemCard}>
-                        <CardItems />
-                        <CardItems />
-                    </View>
+                    {wishListItems ? (
+                        wishListItems.map((row) => {
+                            return (
+                                <View style={styles.itemCard}>
+                                    {row.length > 1
+                                        ? row.map((item) => {
+                                              return (
+                                                  <CardItems
+                                                      name={item?.product?.name}
+                                                      imageSrc={{ uri: BASE_URL + item?.product?.mobile_img }}
+                                                      price={item?.product?.price}
+                                                      dataId={item?.product?.id}
+                                                  />
+                                              );
+                                          })
+                                        : row.map((item) => {
+                                              return (
+                                                  <>
+                                                      <CardItems
+                                                          name={item?.product?.name}
+                                                          imageSrc={{ uri: BASE_URL + item?.product?.mobile_img }}
+                                                          price={item?.product?.price}
+                                                          dataId={item?.product?.id}
+                                                      />
+                                                      <View style={{ flex: 1 }}></View>
+                                                  </>
+                                              );
+                                          })}
+                                </View>
+                            );
+                        })
+                    ) : (
+                        <></>
+                    )}
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -69,6 +106,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.darkGray
     },
     itemCard: {
+        flex: 1,
         ...commonStyles.row,
         ...commonStyles.marginTop10,
         justifyContent: 'space-between',

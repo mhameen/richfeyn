@@ -3,13 +3,15 @@ import { Image, View, StyleSheet, Text } from 'react-native';
 
 import { colors, commonStyles } from '../../assets/styles/common';
 import { ArrowRight } from 'react-native-feather';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const CardItems = ({ text = '' }) => {
+const CardItems = ({ name, imageSrc, price, dataId }) => {
     return (
         <View style={{ ...commonStyles.flexOne, marginTop: 10 }}>
             <View style={commonStyles.row}>
                 <View
                     style={{
+                        flex: 1,
                         backgroundColor: colors.white,
                         alignItems: 'center',
                         borderRadius: 11,
@@ -24,15 +26,22 @@ const CardItems = ({ text = '' }) => {
                         source={require('../../assets/images/basmati.png')}
                         resizeMode="contain"
                     />
-                    <View style={{ ...commonStyles.flexOne, borderBottomColor: 'black', borderBottomWidth: 1 }}>
-                        <Text style={{ fontSize: 13, color: colors.richBlack, paddingTop: 5 }}>
-                            Daawat Rozana Gold Basmati Rice
-                        </Text>
+                    <View
+                        style={{
+                            ...commonStyles.flexOne,
+                            borderBottomColor: 'black',
+                            borderBottomWidth: 1,
+                            width: '100%'
+                        }}
+                    >
+                        <Text style={{ fontSize: 13, color: colors.richBlack, paddingTop: 5 }}>{name}</Text>
                         <Text style={{ fontSize: 13, color: colors.richBlack, fontWeight: 'bold', paddingBottom: 5 }}>
-                            120 /-
+                            {price} /-
                         </Text>
                     </View>
-                    <Text style={{ fontSize: 11, color: colors.richBlack, paddingTop: 5 }}>MOVE TO CART</Text>
+                    <TouchableOpacity>
+                        <Text style={{ fontSize: 11, color: colors.richBlack, paddingTop: 5 }}>MOVE TO CART</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>

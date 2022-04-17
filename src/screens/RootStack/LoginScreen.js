@@ -26,7 +26,7 @@ import { reactNavigation } from '../../services';
 import { colors } from '../../assets/styles/common';
 import { widthToDP, heightToDP } from '../../services/utils';
 
-import { createLoginOTP, verifyOtp } from '../../../src/services/auth';
+import { createLoginOTP } from '../../../src/services/auth';
 
 import { notifySuccess, notifyError } from '../../../src/services/handler';
 
