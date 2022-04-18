@@ -7,16 +7,19 @@ import { navigate } from '../../services/reactNavigation';
 import { getData } from '../../services/utils';
 import { getUserCart } from '../../services/api';
 
-const TopBar = ({ onPress, modalVisible, setModalVisible, toggleDrawer }) => {
+const TopBar = ({ navigation, onPress, modalVisible, setModalVisible, toggleDrawer }) => {
     const [fullName, setFullName] = useState('');
     const [cartCount, setCartCount] = useState(0);
 
     useEffect(() => {}, [getData('full_name').then((name) => setFullName(name))]);
     useEffect(() => {
-        getUserCart().then((response) => {
-            setCartCount(response?.data?.body?.count);
+        const unsubscribe = navigation.addListener('focus', () => {
+            getUserCart().then((response) => {
+                setCartCount(response?.data?.body?.count);
+            });
         });
-    }, []);
+        return unsubscribe;
+    }, [navigation]);
 
     return (
         <View style={{ ...commonStyles.row, marginBottom: 10, alignItems: 'center' }}>

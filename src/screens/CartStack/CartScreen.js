@@ -11,7 +11,7 @@ import { getUserCart, deleteItemCart } from '../../services/api';
 import { notifySuccess } from '../../../src/services/handler';
 import { BASE_URL } from '../../services/constants';
 
-const CartScreen = ({ navigation: { toggleDrawer } }) => {
+const CartScreen = ({ navigation, navigation: { toggleDrawer, addListener } }) => {
     const [cartItems, setCartItems] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
@@ -52,8 +52,11 @@ const CartScreen = ({ navigation: { toggleDrawer } }) => {
     };
 
     useEffect(() => {
-        callAPI();
-    }, []);
+        const unsubscribe = addListener('focus', () => {
+            callAPI();
+        });
+        return unsubscribe;
+    }, [navigation]);
 
     return (
         <SafeAreaView style={commonStyles.safeArea}>
@@ -63,7 +66,7 @@ const CartScreen = ({ navigation: { toggleDrawer } }) => {
                 showsHorizontalScrollIndicator={false}
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    <TopBar toggleDrawer={toggleDrawer} />
+                    <TopBar toggleDrawer={toggleDrawer} navigation={navigation} />
                     <SearchBar placeholder={'Search for items...'} onTextChange={onSearch} onPress={onSearchPress} />
                     <View
                         style={{

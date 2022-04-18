@@ -34,7 +34,6 @@ const SearchScreen = ({ route, navigation: { navigate } }) => {
                 showsHorizontalScrollIndicator={false}
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    {/* <TopBar  /> */}
                     <ScreenHeader text="Search" />
                     <SearchBar
                         placeholder={'Search Food..'}

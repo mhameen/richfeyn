@@ -19,7 +19,7 @@ const InventoryBanner = ({ text, color }) => {
     );
 };
 
-const InventoryScreen = ({ navigation: { toggleDrawer } }) => {
+const InventoryScreen = ({ navigation, navigation: { toggleDrawer } }) => {
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -28,7 +28,7 @@ const InventoryScreen = ({ navigation: { toggleDrawer } }) => {
                 showsHorizontalScrollIndicator={false}
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    <TopBar toggleDrawer={toggleDrawer} />
+                    <TopBar toggleDrawer={toggleDrawer} navigation={navigation} />
                     <SearchBar placeholder={'Search food from pantry...'} />
                     <InventoryBanner color={colors.richOrange} text="Tracked Items" />
                     <InventoryRow

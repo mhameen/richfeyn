@@ -17,7 +17,7 @@ import DrawerScreen from './DrawerScreen';
 import { getUserCart } from '../../services/api';
 import { BASE_URL } from '../../services/constants';
 
-const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
+const HomeScreen = ({ navigation, navigation: { navigate, toggleDrawer } }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [cartProducts, setCartProducts] = useState([]);
     const [searchText, setSearchText] = useState('');
@@ -59,11 +59,11 @@ const HomeScreen = ({ navigation: { navigate, toggleDrawer } }) => {
                 </Modal>
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
                     <TopBar
-                        name="Monica Gellar"
                         onPress={() => navigate('DrawerScreen')}
                         modalVisible={modalVisible}
                         setModalVisible={setModalVisible}
                         toggleDrawer={toggleDrawer}
+                        navigation={navigation}
                     />
                     <SearchBar placeholder={'Search food ...'} onPress={onSearchPress} onTextChange={onSearch} />
                     <View

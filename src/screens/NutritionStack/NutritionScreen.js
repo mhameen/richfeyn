@@ -10,7 +10,7 @@ import Button from '../../components/common/Button';
 
 import { commonStyles } from '../../assets/styles/common';
 
-const NutritionScreen = ({ navigation: { toggleDrawer } }) => {
+const NutritionScreen = ({ navigation, navigation: { toggleDrawer } }) => {
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -19,7 +19,7 @@ const NutritionScreen = ({ navigation: { toggleDrawer } }) => {
                 showsHorizontalScrollIndicator={false}
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    <TopBar toggleDrawer={toggleDrawer} />
+                    <TopBar toggleDrawer={toggleDrawer} navigation={navigation} />
                     <SearchBar placeholder={'Search for items...'} />
                     <View style={{ ...commonStyles.row, ...commonStyles.marginTop20, justifyContent: 'space-between' }}>
                         <Button label={'Daily'} containerStyle={{ paddingHorizontal: 20, borderRadius: 10 }} />

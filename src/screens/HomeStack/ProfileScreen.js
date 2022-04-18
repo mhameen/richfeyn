@@ -35,7 +35,6 @@ const ProfileScreen = ({ navigation: { navigate } }) => {
                 showsHorizontalScrollIndicator={false}
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    {/* <TopBar  /> */}
                     <ScreenHeader text="My Profile" />
                     <View style={{ ...commonStyles.flexOne, padding: 24 }}>
                         <View style={{ ...commonStyles.flexOne, flexDirection: 'row' }}>

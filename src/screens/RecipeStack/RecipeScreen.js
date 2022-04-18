@@ -58,7 +58,7 @@ const RecipeCard = () => {
         </View>
     );
 };
-const CartScreen = ({ navigation: { toggleDrawer } }) => {
+const CartScreen = ({ navigation, navigation: { toggleDrawer } }) => {
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <ScrollView
@@ -67,7 +67,7 @@ const CartScreen = ({ navigation: { toggleDrawer } }) => {
                 showsHorizontalScrollIndicator={false}
             >
                 <View style={{ ...commonStyles.flexOne, marginBottom: 60 }}>
-                    <TopBar toggleDrawer={toggleDrawer} />
+                    <TopBar toggleDrawer={toggleDrawer} navigation={navigation} />
                     <SearchBar placeholder={'Search for items...'} />
                     <ScrollView horizontal style={{ ...commonStyles.flexOne, marginTop: 28 }}>
                         <RecipeImage imageSrc={require('../../assets/images/recipe.png')} label={'Breakfast'} />
