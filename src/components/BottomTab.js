@@ -67,6 +67,15 @@ const InventoryStack = () => {
     );
 };
 
+const ReceipeStack = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="RecipeScreen" header={false} component={RecipeScreen} />
+            <Stack.Screen name="RecipeDetailScreen" header={false} component={RecipeDetailScreen} />
+        </Stack.Navigator>
+    );
+};
+
 const BottomTab = () => {
     return (
         <Tab.Navigator
@@ -93,7 +102,7 @@ const BottomTab = () => {
             />
             <Tab.Screen
                 name="InventoryStack"
-                component={InventoryScreen}
+                component={InventoryStack}
                 options={{
                     tabBarLabel: 'Inventory',
                     tabBarIcon: ({ focused }) => {
@@ -113,7 +122,7 @@ const BottomTab = () => {
             />
             <Tab.Screen
                 name="RecipeStack"
-                component={RecipeScreen}
+                component={ReceipeStack}
                 options={{
                     tabBarLabel: 'Recipe',
                     tabBarIcon: ({ focused }) => {

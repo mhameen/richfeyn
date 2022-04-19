@@ -5,6 +5,7 @@ import SearchBar from '../../components/common/SearchBar';
 import TopBar from '../../components/common/TopBar';
 
 import { colors, commonStyles } from '../../assets/styles/common';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const RecipeImage = ({ imageSrc, label }) => {
     return (
@@ -19,9 +20,14 @@ const RecipeImage = ({ imageSrc, label }) => {
     );
 };
 
-const RecipeCard = () => {
+const RecipeCard = ({ navigation }) => {
     return (
-        <View style={{ flex: 1, marginLeft: 10, marginBottom: 35 }}>
+        <TouchableOpacity
+            style={{ flex: 1, marginLeft: 10, marginBottom: 35 }}
+            onPress={() => {
+                navigation.navigate('RecipeDetailScreen');
+            }}
+        >
             <View style={styles.recipeMain}>
                 <View style={{ top: -25, flex: 1 }}>
                     <View style={{ alignItems: 'center' }}>
@@ -55,7 +61,7 @@ const RecipeCard = () => {
                     </View>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 const CartScreen = ({ navigation, navigation: { toggleDrawer } }) => {
@@ -77,8 +83,8 @@ const CartScreen = ({ navigation, navigation: { toggleDrawer } }) => {
                     </ScrollView>
                 </View>
                 <View style={commonStyles.row}>
-                    <RecipeCard />
-                    <RecipeCard />
+                    <RecipeCard navigation={navigation} />
+                    <RecipeCard navigation={navigation} />
                 </View>
                 <View style={commonStyles.row}>
                     <RecipeCard />
